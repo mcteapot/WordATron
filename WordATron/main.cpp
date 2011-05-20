@@ -18,30 +18,59 @@ int main (int argc, const char * argv[])
 */
 
 
-#include<iostream>
-#include<boost/tokenizer.hpp>
-#include<string>
+#include <iostream>
+#include <boost/tokenizer.hpp>
+#include <boost/regex.hpp>
+#include <string>
 #include <fstream>
-
+#include "Words.h"
+//function defentions
+void readBoostRegex();
+void readIfStream();
 void readFile();
 void readText();
+
 
 int main()
 {
     using namespace std;
     using namespace boost;
-    readFile();
+    //readFile();
     //readText();
+    readIfStream();
     cout << "WordATron 0.01" << endl;
+    struct WORDS word1;
+    word1.str = "Hello";
+    cout << word1.str << endl;
+}
+
+//functions
+void readBoostRegex() {
+
+}
+
+void readIfStream() {
+    string line;
+    ifstream myfile ("example.txt");
+    if (myfile.is_open())
+    {
+        while ( myfile.good() )
+        {
+            getline (myfile,line);
+            cout << line << endl;
+        }
+        myfile.close();
+    }
     
+    else cout << "Unable to open file"; 
 }
 
 void readFile() {
     
     using namespace std;
     using namespace boost;
-    
-    ifstream file( __FILE__ ) ;
+    ifstream file( "example.txt" ) ;    
+    //ifstream file( __FILE__ ) ;
     string str;
 
     while( getline( file, str ) )

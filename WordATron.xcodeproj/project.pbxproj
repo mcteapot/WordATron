@@ -26,6 +26,7 @@
 		4732FD0A1384FA940054A350 /* WordATron */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WordATron; sourceTree = BUILT_PRODUCTS_DIR; };
 		4732FD0E1384FA940054A350 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4732FD101384FA940054A350 /* WordATron.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = WordATron.1; sourceTree = "<group>"; };
+		47649C1D1385D12600216095 /* Words.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Words.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +61,7 @@
 			children = (
 				4732FD0E1384FA940054A350 /* main.cpp */,
 				4732FD101384FA940054A350 /* WordATron.1 */,
+				47649C1D1385D12600216095 /* Words.h */,
 			);
 			path = WordATron;
 			sourceTree = "<group>";
@@ -160,7 +162,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				HEADER_SEARCH_PATHS = /Developer/Ogre/OSX_1.7.3/OgreSDK/boost_1_46_1;
+				HEADER_SEARCH_PATHS = /Developer/Llibs/boost/boost_1_46_1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -172,7 +174,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				HEADER_SEARCH_PATHS = /Developer/Ogre/OSX_1.7.3/OgreSDK/boost_1_46_1;
+				HEADER_SEARCH_PATHS = /Developer/Llibs/boost/boost_1_46_1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
