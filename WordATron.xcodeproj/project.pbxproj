@@ -135,6 +135,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -150,6 +151,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 			};
@@ -160,9 +162,15 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "/Developer/Llibs/boost/boost-trunk/bin.v2/libs";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				HEADER_SEARCH_PATHS = /Developer/Llibs/boost/boost_1_46_1;
+				HEADER_SEARCH_PATHS = "/Developer/Llibs/boost/boost-trunk";
+				LIBRARY_SEARCH_PATHS = (
+					"/Developer/Llibs/boost/boost-trunk/bin.v2/libs",
+					"\"$(DEVELOPER_DIR)/Llibs/boost/boost-trunk/bin.v2/libs/regex/build/darwin-4.2.1/release/threading-multi\"",
+					"\"$(DEVELOPER_DIR)/Llibs/boost/boost-trunk/bin.v2/libs/regex/build/darwin-4.2.1/release/link-static/threading-multi\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -173,8 +181,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "/Developer/Llibs/boost/boost-trunk/bin.v2/libs";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				HEADER_SEARCH_PATHS = /Developer/Llibs/boost/boost_1_46_1;
+				HEADER_SEARCH_PATHS = "/Developer/Llibs/boost/boost-trunk";
+				LIBRARY_SEARCH_PATHS = (
+					"/Developer/Llibs/boost/boost-trunk/bin.v2/libs",
+					"\"$(DEVELOPER_DIR)/Llibs/boost/boost-trunk/bin.v2/libs/regex/build/darwin-4.2.1/release/threading-multi\"",
+					"\"$(DEVELOPER_DIR)/Llibs/boost/boost-trunk/bin.v2/libs/regex/build/darwin-4.2.1/release/link-static/threading-multi\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
