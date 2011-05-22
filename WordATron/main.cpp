@@ -16,21 +16,26 @@
 #include "Words.h"
 
 //function defentions
+void addWordToStruct(std::string word); 
 void readWordsInTo(std::string reg, std::string filename);
 void readwiterator(std::string reg, std::string text);
 void readBoostRegex(std::string reg, std::string text);
 //void readBoostRegex();
-std::string* readIfStream(std::string reg, std::string stream);
+std::string* readIfStream(std::string reg, std::string filename);
 void readFile();
 void readText();
 
+struct WORDS word;
+long int counterline;
+long int counterparagraph;
 
 int main()
 {
     using namespace std;
     using namespace boost;
     
-    struct WORDS word1;
+    counterparagraph = 0;
+    //struct WORDS word1;
     
     //readFile();
     //readText();
@@ -40,9 +45,13 @@ int main()
     //readBoostRegex( "(\\w+)!","world!");
     //readwiterator("\\w+","This is his sdf4 fasce.");
     //readwiterator("\\w+\\d | \\w+","This44 is his sdf4 fasce.");
+    //readWordsInTo("\\w+\\d | \\w+", "example.txt");
+    //readWordsInTo("\\w+\\d|[\\w.]+", "example.txt");    
     
-    readWordsInTo("\\w+\\d | \\w+", "example.txt");
-    cout << "WordATron 0.01" << endl<<endl;
+    readWordsInTo("\\w[\\w.]+", "example.txt");
+    //readWordsInTo("\\w[\\w.]+", "example.txt");
+    cout << "#OFPARAGRAPHS:" << counterparagraph << endl;
+    cout << "********WordATron 0.01********" << endl<<endl;
     
 
     
@@ -52,9 +61,38 @@ int main()
     //cout << word1.str << endl;
 }
 //FUNCTIONS
+
+void addWordToStruct(std::string word) {
+    using namespace boost::xpressive;
+    std::istringstream inpStream(word);
+    double inpValue = 0.0;
+    if (inpStream >> inpValue) {
+        std::cout << "NUMBER:" << word << std::endl;
+    }
+    else {
+        //sregex sre = "//w";
+        //sregex sre = +_w;
+        smatch what;
+        sregex wordDotMore = sregex::compile( "(\\w+)(\\.+)" );
+        sregex wordDot = sregex::compile( "(\\w+)(\\.)" );
+        if( regex_match( word, what, wordDotMore ) ) {
+            if (regex_match(word, what, wordDot)) {
+                std::cout << "SINGLE ";
+            }
+            std::cout <<"DOT:"<< word << endl;
+            std::cout << "DOT FIXED:"<< what[1] << '\n';
+            
+        } else {
+        //if( regex_match( "word", "//w//." ) )  
+        std::cout << "WORD:" << word << std::endl;
+        }
+    }
+    //std::cout << word << std::endl;
+    
+}
 //void readWordsInTo(std::string filename) : combo functions to read in file and parce
 void readWordsInTo(std::string reg, std::string filename) {
-    std::string regextest = "\\w+\\d | \\w+";
+    //std::string regextest = "\\w+\\d | \\w+";
     readIfStream(reg, filename);
     
     
@@ -73,7 +111,8 @@ void readwiterator(std::string reg, std::string text) {
     for( ; cur != end; ++cur ) {
         smatch const &what = *cur;
         std::string word = what[0];
-        std::cout << word << '\n';
+        addWordToStruct(word);
+        //std::cout << word << '\n';
     
     }
 }
@@ -98,9 +137,12 @@ using namespace boost::xpressive;
         
 }
 //std::string* readIfStream(std::string stream) : reads instream with a file passed to it, need to return 
-std::string* readIfStream(std::string reg, std::string stream) {
+std::string* readIfStream(std::string reg, std::string filename) {
+    using namespace boost::xpressive;
     string line;
-    ifstream myfile (stream.c_str());
+    ifstream myfile (filename.c_str());
+    bool firstcheck = false;
+    bool iscounting = false;
     //ifstream myfile ("example.txt");
     if (myfile.is_open())
     {
@@ -109,6 +151,32 @@ std::string* readIfStream(std::string reg, std::string stream) {
             
             getline (myfile,line);
             cout << line << endl;
+            cout << endl;
+            /*
+            sregex newLine = sregex::compile( "/\n\n/" );
+            //sregex newLine = sregex::compile( "(\\n)" );
+
+            smatch what;
+            //std::cout<< "WORKING" << endl;
+            if (regex_match(line, what, newLine)) {
+                std::cout << "SINGLE ";
+            }
+            */
+            if(line == "") {
+                if(firstcheck == false && iscounting != true) {
+                    iscounting = true;
+                    firstcheck = true;
+                }
+                if(iscounting == true && firstcheck == true) {
+                    std::cout << "NEWLINE" << std::endl;
+                    counterparagraph ++;
+                    firstcheck = false;
+                }
+            } else if(line != ""){
+                iscounting = false;
+                firstcheck = false;
+            }
+            readwiterator(reg, line);
         }
         return &line;
         myfile.close();
