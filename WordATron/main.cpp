@@ -46,7 +46,7 @@ int main()
     //readBoostRegex( "(\\w+) (\\w+)!","hello world!");
     //readBoostRegex( "(\\w+)!","world!");
     //readwiterator("\\w+","This is his sdf4 fasce.");
-    readwiterator("\\w+","This is his sdf4 fasce.");
+    readwiterator("\\w+\\d | \\w+","This44 is his sdf4 fasce.");
     //cout << "WordATron 0.01" << endl;
     struct WORDS word1;
     //word1.str = "Hello";

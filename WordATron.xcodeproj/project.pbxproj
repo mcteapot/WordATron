@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4732FD0F1384FA940054A350 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4732FD0E1384FA940054A350 /* main.cpp */; };
+		47649C441388887D00216095 /* WordMuncher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 47649C421388887D00216095 /* WordMuncher.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +28,8 @@
 		4732FD0E1384FA940054A350 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4732FD101384FA940054A350 /* WordATron.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = WordATron.1; sourceTree = "<group>"; };
 		47649C1D1385D12600216095 /* Words.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Words.h; sourceTree = "<group>"; };
+		47649C421388887D00216095 /* WordMuncher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WordMuncher.cpp; sourceTree = "<group>"; };
+		47649C431388887D00216095 /* WordMuncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordMuncher.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 				4732FD0E1384FA940054A350 /* main.cpp */,
 				4732FD101384FA940054A350 /* WordATron.1 */,
 				47649C1D1385D12600216095 /* Words.h */,
+				47649C421388887D00216095 /* WordMuncher.cpp */,
+				47649C431388887D00216095 /* WordMuncher.h */,
 			);
 			path = WordATron;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4732FD0F1384FA940054A350 /* main.cpp in Sources */,
+				47649C441388887D00216095 /* WordMuncher.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
