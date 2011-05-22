@@ -25,8 +25,8 @@ std::string* readIfStream(std::string reg, std::string filename);
 void readFile();
 void readText();
 
-struct WORDS word;
-//std::vector<WORDS> wordStrcut;
+struct WORDS words;
+std::vector<WORDS> wordStrcut;
 
 long int counterline;
 long int counterparagraph;
@@ -35,7 +35,7 @@ int main()
 {
     using namespace std;
     using namespace boost;
-    std::vector<WORDS> wordStrcut;
+    //std::vector<WORDS> wordStrcut;
     counterparagraph = counterline = 0;
     //struct WORDS word1;
     //wordStrcut.str = :hello
@@ -51,13 +51,13 @@ int main()
     //readWordsInTo("\\w+\\d|[\\w.]+", "example.txt");    
     //wordStrcut->str.push_back("test");
     std::string hello = "hello";
-    word.str = hello;
-    word.frequency += 1;
-    word.syllables = (int)(hello.size()%3);
-    word.paratraph.push_back(1);
-    word.line.push_back(4);
+    words.str = hello;
+    words.frequency += 1;
+    words.syllables = (int)(hello.size()%3);
+    words.paratraph.push_back(1);
+    words.line.push_back(4);
     //wordStrcut.str.push_back() = hello;
-    wordStrcut.push_back(word);
+    wordStrcut.push_back(words);
     //wordStrcut.str.push_back(word.str);
     wordStrcut[0].paratraph.push_back(2);
     wordStrcut[0].line.push_back(9);
@@ -82,6 +82,16 @@ int main()
     //cout << word1.str << endl;
 }
 //FUNCTIONS
+void createNewWord(std::string word) {
+    struct WORDS wordAdd;
+    wordAdd.str = word;
+    wordAdd.frequency = 1;
+    wordAdd.syllables = (int)(word.size()%3);
+    wordAdd.paratraph.push_back(counterparagraph);
+    wordAdd.line.push_back(counterline);
+    wordStrcut.push_back(words);
+
+}
 
 void addWordToStruct(std::string word) {
     using namespace boost::xpressive;
@@ -94,13 +104,14 @@ void addWordToStruct(std::string word) {
         //sregex sre = "//w";
         //sregex sre = +_w;
         smatch what;
-        sregex wordNewLine = sregex::compile( "(\\w+)(\\.+)|(\\w+)(\\?)|(\\w+)(!)" );
-        sregex wordElse2 = sregex::compile( "(\\w+)(.+)" );
-        sregex wordElse = sregex::compile( "(\\w+)(;)|(\\w+)(,)|(\\w+)(:)" );
+        sregex wordNewLine = sregex::compile( "(\\w+)(\\.+)|(\\w+)(\\?)|(\\w+)(!)|(\\w+)(,)|(\\w+)(;)|(\\w+)(:)" );
         sregex wordDot = sregex::compile( "(\\w+)(\\.)" );
         sregex wordDots = sregex::compile( "(\\w+)(\\.+)" );
         sregex wordQuestion = sregex::compile( "(\\w+)(\\?)" );
         sregex wordExclamation = sregex::compile( "(\\w+)(!)" );
+        sregex wordComa = sregex::compile( "(\\w+)(,)" );
+        sregex wordSemiColin = sregex::compile( "(\\w+)(;)" );  
+        sregex wordColin = sregex::compile( "(\\w+)(:)" );
         if( regex_match( word, what, wordNewLine ) ) {
             if (regex_match(word, what, wordDot)) {
                 std::cout << "PEDIOD ";
@@ -118,17 +129,32 @@ void addWordToStruct(std::string word) {
                 std::cout << "EXCLIMATIN";
                 counterline ++;
             }
+            if (regex_match(word, what, wordComa)) {
+                std::cout << "COMA ";
+            }
+            if (regex_match(word, what, wordSemiColin)) {
+                std::cout << "SEMICOLIN ";
+            }
+            if (regex_match(word, what, wordColin)) {
+                std::cout << "COLIN ";
+            }
             std::cout <<"DOT:"<< word << endl;
             std::cout << "WORD FIXED:"<< what[1] << '\n';
             
-        } else if (regex_match( word, what, wordElse )) {
+        }/* else if (regex_match( word, what, wordElse )) {
             std::cout <<"OTHER:"<< word << endl;
             //std::cout << "DOT FIXED:"<< what[1] << '\n';
-            std::cout << "WORD FIXED:" << what[1] << std::endl;
+            if(word !="") {
+                std::cout << "WORD FIXED:" << what[1] << std::endl;
+            }
+            //std::cout << "WORD FIXED:" << what[1] << std::endl;
         
-        } else {
+        }*/ else {
         //if( regex_match( "word", "//w//." ) )  
-            std::cout << "WORD:" << word << std::endl;
+            if(word !="") {
+                std::cout << "WORD:" << word << std::endl;
+            }
+            //std::cout << "WORD:" << word << std::endl;
         }
          //       std::cout << "WORD:" << word << std::endl;
     }
