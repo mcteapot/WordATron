@@ -26,6 +26,8 @@ void readFile();
 void readText();
 
 struct WORDS word;
+//std::vector<WORDS> wordStrcut;
+
 long int counterline;
 long int counterparagraph;
 
@@ -33,10 +35,10 @@ int main()
 {
     using namespace std;
     using namespace boost;
-    
+    std::vector<WORDS> wordStrcut;
     counterparagraph = 0;
     //struct WORDS word1;
-    
+    //wordStrcut.str = :hello
     //readFile();
     //readText();
     //readIfStream("example.txt");
@@ -47,8 +49,26 @@ int main()
     //readwiterator("\\w+\\d | \\w+","This44 is his sdf4 fasce.");
     //readWordsInTo("\\w+\\d | \\w+", "example.txt");
     //readWordsInTo("\\w+\\d|[\\w.]+", "example.txt");    
+    //wordStrcut->str.push_back("test");
+    std::string hello = "hello";
+    word.str = hello;
+    word.frequency += 1;
+    word.syllables = (int)(hello.size()%3);
+    word.paratraph.push_back(1);
+    word.line.push_back(4);
+    //wordStrcut.str.push_back() = hello;
+    wordStrcut.push_back(word);
+    //wordStrcut.str.push_back(word.str);
+    wordStrcut[0].paratraph.push_back(2);
+    wordStrcut[0].line.push_back(9);
+    cout << wordStrcut[0].str << wordStrcut[0].frequency << wordStrcut[0].paratraph[0] 
+    << wordStrcut[0].line[0]  << wordStrcut[0].paratraph[1]  << wordStrcut[0].line[1] << endl;
+    //cout << word.str << word.frequency << word.syllables << word.paratraph[0] << word.line[0] << endl;
     
-    readWordsInTo("\\w[\\w.]+", "example.txt");
+    
+    //readWordsInTo("\\w[\\w.]+", "example.txt");
+    
+
     //readWordsInTo("\\w[\\w.]+", "example.txt");
     cout << "#OFPARAGRAPHS:" << counterparagraph << endl;
     cout << "********WordATron 0.01********" << endl<<endl;
@@ -74,7 +94,7 @@ void addWordToStruct(std::string word) {
         //sregex sre = +_w;
         smatch what;
         sregex wordDotMore = sregex::compile( "(\\w+)(\\.+)" );
-        sregex wordDot = sregex::compile( "(\\w+)(\\.)" );
+        sregex wordDot = sregex::compile( "(\\w+)(\\.)|(\\w+)(\?)" );
         if( regex_match( word, what, wordDotMore ) ) {
             if (regex_match(word, what, wordDot)) {
                 std::cout << "SINGLE ";
