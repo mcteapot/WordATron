@@ -23,8 +23,8 @@ struct WORDS {
     string str;
     long int frequency;
     int syllables; 
-    vector<int> paratraph;
-    vector<int> line;
+    vector<long int> paratraph;
+    vector<long int> line;
     void Count(int p, int l);
 };
 

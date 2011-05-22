@@ -104,7 +104,7 @@ void addWordToStruct(std::string word) {
         //sregex sre = "//w";
         //sregex sre = +_w;
         smatch what;
-        sregex wordNewLine = sregex::compile( "(\\w+)(\\.+)|(\\w+)(\\?)|(\\w+)(!)|(\\w+)(,)|(\\w+)(;)|(\\w+)(:)" );
+        sregex wordNewLine = sregex::compile( "(\\w+)(\\.+)|(\\w+)(\\?)|(\\w+)(!)|(\\w+)(,)|(\\w+)(;)|(\\w+)(:)|(\\w+)(\\d+)" );
         sregex wordDot = sregex::compile( "(\\w+)(\\.)" );
         sregex wordDots = sregex::compile( "(\\w+)(\\.+)" );
         sregex wordQuestion = sregex::compile( "(\\w+)(\\?)" );
@@ -112,6 +112,7 @@ void addWordToStruct(std::string word) {
         sregex wordComa = sregex::compile( "(\\w+)(,)" );
         sregex wordSemiColin = sregex::compile( "(\\w+)(;)" );  
         sregex wordColin = sregex::compile( "(\\w+)(:)" );
+        sregex wordNumbers = sregex::compile( "(\\w+)(\\d+)" );
         if( regex_match( word, what, wordNewLine ) ) {
             if (regex_match(word, what, wordDot)) {
                 std::cout << "PEDIOD ";
@@ -119,44 +120,60 @@ void addWordToStruct(std::string word) {
             }
             if (regex_match(word, what, wordDots)) {
                 std::cout << "DOTDOTDOT  ";
+                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                word = what[1];
                 counterline ++;
             }
             if (regex_match(word, what, wordQuestion)) {
                 std::cout << "QESTION ";
+                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                word = what[1];
                 counterline ++;
             }
             if (regex_match(word, what, wordExclamation)) {
-                std::cout << "EXCLIMATIN";
+                std::cout << "EXCLIMATIN ";
+                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                word = what[1];
                 counterline ++;
             }
             if (regex_match(word, what, wordComa)) {
                 std::cout << "COMA ";
+                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                word = what[1];
             }
             if (regex_match(word, what, wordSemiColin)) {
                 std::cout << "SEMICOLIN ";
+                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                word = what[1];
             }
             if (regex_match(word, what, wordColin)) {
                 std::cout << "COLIN ";
+                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                word = what[1];
             }
-            std::cout <<"DOT:"<< word << endl;
-            std::cout << "WORD FIXED:"<< what[1] << '\n';
+            if (regex_match(word, what, wordNumbers)) {
+                std::cout << "NUMBER ";
+                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                word = what[1];
+            }
             
-        }/* else if (regex_match( word, what, wordElse )) {
-            std::cout <<"OTHER:"<< word << endl;
-            //std::cout << "DOT FIXED:"<< what[1] << '\n';
-            if(word !="") {
-                std::cout << "WORD FIXED:" << what[1] << std::endl;
+        } 
+        if(word !="") {
+            bool newWord = true;
+            for(int i = 0; i < wordStrcut.size(); i++) {
+                if (wordStrcut[i].str == word ) {
+                    words.frequency ++;
+                    wordStrcut[i].paratraph.push_back(counterparagraph);
+                    wordStrcut[i].line.push_back(counterline);
+                    newWord = false;
+                }
             }
-            //std::cout << "WORD FIXED:" << what[1] << std::endl;
-        
-        }*/ else {
-        //if( regex_match( "word", "//w//." ) )  
-            if(word !="") {
-                std::cout << "WORD:" << word << std::endl;
+            if(newWord) {
+                createNewWord(word);
             }
-            //std::cout << "WORD:" << word << std::endl;
+            std::cout << "WORD:" << word << std::endl;
         }
-         //       std::cout << "WORD:" << word << std::endl;
+        
     }
     //std::cout << word << std::endl;
     
