@@ -36,7 +36,7 @@ int main()
     using namespace std;
     using namespace boost;
     std::vector<WORDS> wordStrcut;
-    counterparagraph = 0;
+    counterparagraph = counterline = 0;
     //struct WORDS word1;
     //wordStrcut.str = :hello
     //readFile();
@@ -66,10 +66,11 @@ int main()
     //cout << word.str << word.frequency << word.syllables << word.paratraph[0] << word.line[0] << endl;
     
     
-    //readWordsInTo("\\w[\\w.]+", "example.txt");
-    
+    readWordsInTo("\\w[\\w.]\\S+|\\w[\\w.]\\?", "example.txt");
+    //readWordsInTo("\\w[\\w.]\\S+|", "example.txt");
 
     //readWordsInTo("\\w[\\w.]+", "example.txt");
+    std::cout << "#OFLINES:" << counterline << endl;
     cout << "#OFPARAGRAPHS:" << counterparagraph << endl;
     cout << "********WordATron 0.01********" << endl<<endl;
     
@@ -93,19 +94,43 @@ void addWordToStruct(std::string word) {
         //sregex sre = "//w";
         //sregex sre = +_w;
         smatch what;
-        sregex wordDotMore = sregex::compile( "(\\w+)(\\.+)" );
-        sregex wordDot = sregex::compile( "(\\w+)(\\.)|(\\w+)(\?)" );
-        if( regex_match( word, what, wordDotMore ) ) {
+        sregex wordNewLine = sregex::compile( "(\\w+)(\\.+)|(\\w+)(\\?)|(\\w+)(!)" );
+        sregex wordElse2 = sregex::compile( "(\\w+)(.+)" );
+        sregex wordElse = sregex::compile( "(\\w+)(;)|(\\w+)(,)|(\\w+)(:)" );
+        sregex wordDot = sregex::compile( "(\\w+)(\\.)" );
+        sregex wordDots = sregex::compile( "(\\w+)(\\.+)" );
+        sregex wordQuestion = sregex::compile( "(\\w+)(\\?)" );
+        sregex wordExclamation = sregex::compile( "(\\w+)(!)" );
+        if( regex_match( word, what, wordNewLine ) ) {
             if (regex_match(word, what, wordDot)) {
-                std::cout << "SINGLE ";
+                std::cout << "PEDIOD ";
+                counterline ++;
+            }
+            if (regex_match(word, what, wordDots)) {
+                std::cout << "DOTDOTDOT  ";
+                counterline ++;
+            }
+            if (regex_match(word, what, wordQuestion)) {
+                std::cout << "QESTION ";
+                counterline ++;
+            }
+            if (regex_match(word, what, wordExclamation)) {
+                std::cout << "EXCLIMATIN";
+                counterline ++;
             }
             std::cout <<"DOT:"<< word << endl;
-            std::cout << "DOT FIXED:"<< what[1] << '\n';
+            std::cout << "WORD FIXED:"<< what[1] << '\n';
             
+        } else if (regex_match( word, what, wordElse )) {
+            std::cout <<"OTHER:"<< word << endl;
+            //std::cout << "DOT FIXED:"<< what[1] << '\n';
+            std::cout << "WORD FIXED:" << what[1] << std::endl;
+        
         } else {
         //if( regex_match( "word", "//w//." ) )  
-        std::cout << "WORD:" << word << std::endl;
+            std::cout << "WORD:" << word << std::endl;
         }
+         //       std::cout << "WORD:" << word << std::endl;
     }
     //std::cout << word << std::endl;
     
@@ -188,9 +213,12 @@ std::string* readIfStream(std::string reg, std::string filename) {
                     firstcheck = true;
                 }
                 if(iscounting == true && firstcheck == true) {
+                    std::cout << "#OFLINES:" << counterline << endl;
                     std::cout << "NEWLINE" << std::endl;
                     counterparagraph ++;
                     firstcheck = false;
+                    counterline = 0;
+                    
                 }
             } else if(line != ""){
                 iscounting = false;
