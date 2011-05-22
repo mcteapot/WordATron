@@ -5,6 +5,9 @@
 //  Created by arjun prakash on 5/21/11.
 //  Copyright 2011 bellmonde. All rights reserved.
 //
+#ifndef WORDMUNCHER_H
+#define WORDMUNCHER_H
+
 #include <iostream>
 #include <boost/tokenizer.hpp>
 #include <boost/regex.hpp>
@@ -47,3 +50,5 @@ void WordMuncher::printError(std::string string) {
     
     cout << "Keeping it lill" << endl;
 }
+
+#endif //WORDMUNCHER_H

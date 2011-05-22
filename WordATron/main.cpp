@@ -5,17 +5,6 @@
 //  Created by arjun prakash on 2011-05-19.
 //  Copyright 2011 cyborgDino. All rights reserved.
 //
-/*
-#include <iostream>
-
-int main (int argc, const char * argv[])
-{
-
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
-}
-*/
 
 
 #include <iostream>
@@ -27,10 +16,11 @@ int main (int argc, const char * argv[])
 #include "Words.h"
 
 //function defentions
+void readWordsInTo(std::string reg, std::string filename);
 void readwiterator(std::string reg, std::string text);
 void readBoostRegex(std::string reg, std::string text);
 //void readBoostRegex();
-void readIfStream();
+std::string* readIfStream(std::string reg, std::string stream);
 void readFile();
 void readText();
 
@@ -39,21 +29,38 @@ int main()
 {
     using namespace std;
     using namespace boost;
+    
+    struct WORDS word1;
+    
     //readFile();
     //readText();
-    //readIfStream();
+    //readIfStream("example.txt");
     //readBoostRegex( "\\w+","hello world!");
     //readBoostRegex( "(\\w+) (\\w+)!","hello world!");
     //readBoostRegex( "(\\w+)!","world!");
     //readwiterator("\\w+","This is his sdf4 fasce.");
-    readwiterator("\\w+\\d | \\w+","This44 is his sdf4 fasce.");
-    //cout << "WordATron 0.01" << endl;
-    struct WORDS word1;
-    //word1.str = "Hello";
-    cout << word1.str << endl;
-}
+    //readwiterator("\\w+\\d | \\w+","This44 is his sdf4 fasce.");
+    
+    readWordsInTo("\\w+\\d | \\w+", "example.txt");
+    cout << "WordATron 0.01" << endl<<endl;
+    
 
-//functions
+    
+    
+    
+    //word1.str = "Hello";
+    //cout << word1.str << endl;
+}
+//FUNCTIONS
+//void readWordsInTo(std::string filename) : combo functions to read in file and parce
+void readWordsInTo(std::string reg, std::string filename) {
+    std::string regextest = "\\w+\\d | \\w+";
+    readIfStream(reg, filename);
+    
+    
+
+}
+//void readwiterator(std::string reg, std::string text) :: idderates over a string 
 void readwiterator(std::string reg, std::string text) {
     using namespace boost::xpressive;
     std::string str( text );
@@ -70,7 +77,7 @@ void readwiterator(std::string reg, std::string text) {
     
     }
 }
-
+//void readBoostRegex(std::string reg, std::string text) : xpressive regex test
 void readBoostRegex(std::string reg, std::string text) {
 using namespace boost::xpressive;
     std::string hello(text);
@@ -90,24 +97,28 @@ using namespace boost::xpressive;
     }
         
 }
-
-void readIfStream() {
+//std::string* readIfStream(std::string stream) : reads instream with a file passed to it, need to return 
+std::string* readIfStream(std::string reg, std::string stream) {
     string line;
-    ifstream myfile ("example.txt");
+    ifstream myfile (stream.c_str());
+    //ifstream myfile ("example.txt");
     if (myfile.is_open())
     {
         while ( myfile.good() )
         {
+            
             getline (myfile,line);
             cout << line << endl;
         }
+        return &line;
         myfile.close();
     }
     
     else cout << "Unable to open file"; 
+    return &line;
 }
-
-void readFile() {
+//void readFile(std::string filename) : uses old boost tokenizer
+void readFile(std::string filename) {
     
     using namespace std;
     using namespace boost;
@@ -122,7 +133,7 @@ void readFile() {
             beg != toker.end() ; ++beg ) cout << *beg << '\n' ;
     }
 }
-
+//void readText() : uses boots tokenizer to breakup a string
 void readText() {
     
     using namespace std;
