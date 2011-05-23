@@ -42,15 +42,16 @@ public:
     void readFileRegex(std::string reg, std::string filename);
     void readIfStream(string reg, string filename);
     void readWriteTokenizer(string reg, string text);
-    void addWordToStruct(std::string word); 
-    void printTest();
+    void addWordToStruct(std::string word);
+    void printStrcutOfWords();
     
     
 private:
     //DATA
     string regex;
     string filenames;
-    vector<WORDS> wordStrcut;
+    struct WORDS theword;
+    vector<WORDS> wordstrcut;
     long int counterline;
     long int counterparagraph;
     bool debug;

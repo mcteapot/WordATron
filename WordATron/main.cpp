@@ -16,6 +16,7 @@ using namespace std;
 int main()
 {
     WordMuncher wordmuch("\\w[\\w.]\\S+|\\w[\\w.]\\?|\\w[\\w+]", "example.txt");
+    wordmuch.printStrcutOfWords();
     cout << "********WordATron 0.01********" <<endl;
     //wordmuch().working();
     return 0;

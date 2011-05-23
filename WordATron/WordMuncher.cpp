@@ -16,12 +16,13 @@ WordMuncher::WordMuncher() {
 }
 
 WordMuncher::WordMuncher(string reg, string filename) {
-    debug = true;
-    counterparagraph = counterline = 0;
+    debug = false;
+    counterparagraph = counterline = 1;
+    theword.paratraph.push_back(counterparagraph);
+    theword.line.push_back(counterline);
     filenames = filename;
     regex = reg;
     readIfStream(regex, filenames);
-    printTest();
 }
 WordMuncher::~WordMuncher() {}
 //Member Functions//
@@ -60,7 +61,7 @@ void WordMuncher::readIfStream(std::string reg, std::string filename) {
                     }    
                     counterparagraph ++;
                     firstcheck = false;
-                    counterline = 0;
+                    counterline = 1;
                     
                 }
             } else if(line != ""){
@@ -88,17 +89,22 @@ void WordMuncher::readWriteTokenizer(string reg, string text) {
         if(debug) {
             cout << word << '\n';
         }
-        //addWordToStruct(word);
+        addWordToStruct(word);
     }
 }
 
+//void addWordToStruct(std::string word) //skims off extras characters and addes to vector
 void WordMuncher::addWordToStruct(std::string word) {
-    using namespace boost::xpressive;
-    std::istringstream inpStream(word);
+    //using namespace boost::xpressive;
+    istringstream inpStream(word);
     double inpValue = 0.0;
+    //finds Numers
     if (inpStream >> inpValue) {
-        std::cout << "NUMBER:" << word << std::endl;
+        if(debug) {
+            std::cout << "NUMBER:" << word << std::endl;
+        }    
     }
+    //Finding matching to weed out puncution
     else {
 
         smatch what;
@@ -113,72 +119,99 @@ void WordMuncher::addWordToStruct(std::string word) {
         sregex wordNumbers = sregex::compile( "(\\w+)(\\d+)" );
         if( regex_match( word, what, wordNewLine ) ) {
             if (regex_match(word, what, wordDot)) {
-                std::cout << "PEDIOD ";
+                if(debug) {
+                    std::cout << "PEDIOD ";
+                }
+                word = "";
                 counterline ++;
             }
             if (regex_match(word, what, wordDots)) {
-                std::cout << "DOTDOTDOT  ";
-                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                if(debug) {
+                    std::cout << "DOTDOTDOT  ";
+                    std::cout << "WORD FIXED:"<< what[1] << '\n';
+                }
                 word = what[1];
                 counterline ++;
             }
             if (regex_match(word, what, wordQuestion)) {
-                std::cout << "QESTION ";
-                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                if(debug) {
+                    std::cout << "QESTION ";
+                    std::cout << "WORD FIXED:"<< what[1] << '\n';
+                }
                 word = what[1];
                 counterline ++;
             }
             if (regex_match(word, what, wordExclamation)) {
-                std::cout << "EXCLIMATIN ";
-                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                if(debug) {
+                    std::cout << "EXCLIMATIN ";
+                    std::cout << "WORD FIXED:"<< what[1] << '\n';
+                }
                 word = what[1];
                 counterline ++;
             }
             if (regex_match(word, what, wordComa)) {
-                std::cout << "COMA ";
-                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                if(debug) {
+                    std::cout << "COMA ";
+                    std::cout << "WORD FIXED:"<< what[1] << '\n';
+                }
                 word = what[1];
             }
             if (regex_match(word, what, wordSemiColin)) {
-                std::cout << "SEMICOLIN ";
-                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                if(debug) {
+                    std::cout << "SEMICOLIN ";
+                    std::cout << "WORD FIXED:"<< what[1] << '\n';
+                }
                 word = what[1];
             }
             if (regex_match(word, what, wordColin)) {
-                std::cout << "COLIN ";
-                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                if(debug) {
+                    std::cout << "COLIN ";
+                    std::cout << "WORD FIXED:"<< what[1] << '\n';
+                }
                 word = what[1];
             }
             if (regex_match(word, what, wordNumbers)) {
-                std::cout << "NUMBER ";
-                std::cout << "WORD FIXED:"<< what[1] << '\n';
+                if(debug) {
+                    std::cout << "NUMBER ";
+                    std::cout << "WORD FIXED:"<< what[1] << '\n';
+                }
                 word = what[1];
             }
             
         } 
         if(word !="") {
-            bool newWord = true;
-            for(int i = 0; i < wordStrcut.size(); i++) {
-                if (wordStrcut[i].str == word ) {
-                    wordStrcut[i].frequency ++;
-                    wordStrcut[i].paratraph.push_back(counterparagraph);
-                    wordStrcut[i].line.push_back(counterline);
-                    std::cout << "WORD ADDED:" << word << std::endl;
-                    newWord = false;
-                }
+            if(debug) {
+                cout <<word<< " ADD WORD TO VECTOR" << endl;
+                
             }
-            if(newWord) {
-                //(word);
-                std::cout << "WORD CREATED:" << word << std::endl;
+            theword.str = word;
+            theword.frequency = 1;
+            if((int)(word.size()%3) == 0) {
+                theword.syllables = 1;
+            
+            }else {
+                theword.syllables = (int)(word.size()/3);
             }
+            theword.paratraph[0] = counterparagraph;
+            theword.line[0] = counterline;
+            
         }
+        if(debug) {
+            cout << theword.str << " " << theword.frequency << " " << theword.syllables << " " <<  theword.paratraph[0] << " " << theword.line[0] << " " << endl;
+        }
+        wordstrcut.push_back(theword);
         
     }
-    //std::cout << word << std::endl;
+
     
 }
-
-//void WordMuncher::printTest() : Print out to seee if it is working
-void WordMuncher::printTest() {
-    cout << "Working" << endl;
+    
+//void printStrcutOfWords() :: print out strcut of words
+void WordMuncher::printStrcutOfWords() {
+    for(int i = 0; i < wordstrcut.size(); i++) {
+        cout << "WORD " << i << ": "<< wordstrcut[i].str << endl;
+        cout << "SYLB : " << wordstrcut[i].syllables << endl;
+        cout << "PRGH : " << wordstrcut[i].paratraph[0] << endl;
+        cout << "LINE : " << wordstrcut[i].line[0] << endl;
+    }
 }
