@@ -16,9 +16,11 @@ using namespace std;
 int main()
 {
     cout << "********WordATron 0.01********" <<endl;
-    WordMuncher wordmuch("\\w[\\w.]\\S+|\\w[\\w.]\\?|\\w[\\w+]", "example.txt");
+    WordMuncher wordmunch("\\w[\\w.]\\S+|\\w[\\w.]\\?|\\w[\\w+]", "example.txt");
     //wordmuch.printStrcutOfWords();
-    wordmuch.printFrequencytOfWords();
+    //wordmuch.printFrequencytOfWords();
+    wordmunch.setMostFrequentWords();
+    wordmunch.printMostFrequencytOfWords();
     //wordmuch().working();
     return 0;
 

@@ -16,7 +16,7 @@
 #include <fstream>
 
 
-#include "Words.h"
+#include "AWord.h"
 
 //function defentions
 using namespace std;
@@ -45,14 +45,17 @@ public:
     void printStrcutOfWords();
     void setFrequentWords();
     void printFrequencytOfWords();
+    void setMostFrequentWords();
+    void printMostFrequencytOfWords();
     
 private:
     //DATA
     string regex;
     string filenames;
-    struct WORDS theword;
-    vector<WORDS> wordstrcut;
-    vector<WORDS> wordstrcutfrequent;
+    struct AWORD theword;
+    vector<AWORD> wordstrcut;
+    vector<AWORD> wordstrcutfrequent;
+    vector<AWORD> wordstrcutmostfrequent;
     long int counterline;
     long int counterparagraph;
     bool debug;

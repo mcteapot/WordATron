@@ -5,8 +5,8 @@
 //  Created by arjun prakash on 2011-05-19.
 //  Copyright 2011 bellmonde. All rights reserved.
 //
-#ifndef WORDS_H
-#define WORDS_H
+#ifndef AWORDS_H
+#define AWORDS_H
 
 #include <iostream>
 #include <string>
@@ -14,7 +14,7 @@
 using namespace std;
 
     
-struct WORDS {
+struct AWORD {
     
     string str;
     long int frequency;
@@ -24,4 +24,4 @@ struct WORDS {
 };
 
 
-#endif //WORDS_H
+#endif //AWORDS_H

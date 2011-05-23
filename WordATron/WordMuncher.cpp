@@ -217,6 +217,8 @@ void WordMuncher::printStrcutOfWords() {
         cout << endl;
     }
 }
+
+//void printFrequencytOfWords() : print frequency of words
 void WordMuncher::printFrequencytOfWords() {
     for(int i = 0; i < wordstrcutfrequent.size(); i++) {
         cout << "WORD " << i << ": "<< wordstrcutfrequent[i].str << endl;
@@ -252,4 +254,55 @@ void WordMuncher::setFrequentWords() {
     }
     
 }
+//void setMostFrequentWords(): finds top 10 frequent words
+void WordMuncher::setMostFrequentWords() {
+    bool newword = true;
+    int i, j;
+    //find the top 10 frequent
+    for(i = 0; i < wordstrcutfrequent.size(); i++) {
+        if(newword) {
+            while(wordstrcutmostfrequent.size() < 10) {
+                wordstrcutmostfrequent.push_back(wordstrcutfrequent[i]);
+                i++;
+            }
+            newword = false;
+        }
+        int temp = -1;
+        for(j = 0; j < wordstrcutmostfrequent.size(); j++) {
+            if(wordstrcutfrequent[i].frequency > wordstrcutmostfrequent[j].frequency) {
+                if(temp == -1) {
+                    temp = j;
+                }
+                if((wordstrcutmostfrequent[j].frequency < wordstrcutmostfrequent[temp].frequency) && (temp != -1)) {
+                    temp = j;
+                } 
+            }
+        }
+        if(temp != -1) {
+            wordstrcutmostfrequent[temp] = wordstrcutfrequent[i];
+        }
+    }
+    
+}
 
+//void printMostFrequencytOfWords() : print frequency of words
+void WordMuncher::printMostFrequencytOfWords() {
+    cout << wordstrcutmostfrequent.size() << endl;
+    for(int i = 0; i < wordstrcutmostfrequent.size(); i++) {
+        cout << "WORD " << i << ": "<< wordstrcutmostfrequent[i].str << endl;
+        cout << "FREQ : " << wordstrcutmostfrequent[i].frequency << endl;
+        cout << "SYLB : " << wordstrcutmostfrequent[i].syllables << endl;
+        cout << "PRGH : ";
+        
+        for(int j = 0; j < wordstrcutmostfrequent[i].paratraph.size(); j++) {
+            cout << wordstrcutmostfrequent[i].paratraph[j] << " ";
+        }
+        cout << endl;
+        
+        cout << "LINE : ";
+        for(int j = 0; j < wordstrcutmostfrequent[i].line.size(); j++) {
+            cout << wordstrcutmostfrequent[i].line[j] << " ";
+        }
+        cout << endl << endl;
+    }
+}
