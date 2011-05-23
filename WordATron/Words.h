@@ -8,15 +8,11 @@
 #ifndef WORDS_H
 #define WORDS_H
 
+#include <iostream>
 #include <string>
-#include "boost/tuple/tuple.hpp"
 
 using namespace std;
 
-struct CountStore {
-    int paratraph;
-    int line;
-};
     
 struct WORDS {
     
@@ -25,7 +21,6 @@ struct WORDS {
     int syllables; 
     vector<long int> paratraph;
     vector<long int> line;
-    void Count(int p, int l);
 };
 
 

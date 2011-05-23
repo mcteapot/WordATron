@@ -10,45 +10,52 @@
 
 #include <iostream>
 #include <boost/tokenizer.hpp>
-#include <boost/regex.hpp>
+//#include <boost/regex.hpp>
 #include <boost/xpressive/xpressive.hpp>
 #include <string>
 #include <fstream>
+
+
 #include "Words.h"
 
 //function defentions
 using namespace std;
+using namespace boost;
+using namespace boost::xpressive;
 
 enum ERRORS {EMPTY, FULL};
+\
+
+
+
+
+
+
 
 class WordMuncher {
 public:
-    //Word();
-    //function defentions
-    void readwiterator(std::string reg, std::string text);
-    void readBoostRegex(std::string reg, std::string text);
-    //void readBoostRegex();
-    void readIfStream();
-    void readFiless();
-    void readText();
-    void printError(std::string string);
-    
+    //INITS
+    WordMuncher();
+    WordMuncher(string reg,string filename);
+    ~WordMuncher();
+    //METHODS
+    void readFileRegex(std::string reg, std::string filename);
+    void readIfStream(string reg, string filename);
+    void readWriteTokenizer(string reg, string text);
+    void addWordToStruct(std::string word); 
+    void printTest();
     
     
 private:
+    //DATA
+    string regex;
+    string filenames;
+    vector<WORDS> wordStrcut;
+    long int counterline;
+    long int counterparagraph;
+    bool debug;
+
 
 };
-
-//void Word::readFiles() {}
-void WordMuncher::readFiless(){
-    printError("ERROR");
-    //cout << "Keeping it lill" << endl;
-}
-
-
-void WordMuncher::printError(std::string string) {
-    
-    cout << "Keeping it lill" << endl;
-}
 
 #endif //WORDMUNCHER_H
