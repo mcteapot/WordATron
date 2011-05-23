@@ -5695,7 +5695,7 @@
 				<integer>405</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/arjunprakash/Working/Development/CS8/WordATron/WordATron/WordMuncher.h</string>
+		<string>file://localhost/Users/arjunprakash/Working/Development/CS8/WordATron/WordATron/Words.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5713,7 +5713,7 @@
 				<integer>407</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/arjunprakash/Working/Development/CS8/WordATron/WordATron/WordMuncher.cpp</string>
+		<string>file://localhost/Users/arjunprakash/Working/Development/CS8/WordATron/WordATron/WordMuncher.h</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5731,7 +5731,7 @@
 				<integer>409</integer>
 			</dict>
 		</dict>
-		<string>file://localhost/Users/arjunprakash/Working/Development/CS8/WordATron/WordATron/Words.h</string>
+		<string>file://localhost/Users/arjunprakash/Working/Development/CS8/WordATron/WordATron/WordMuncher.cpp</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -7468,7 +7468,7 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>327808789.87373298</real>
+		<real>327814353.39183301</real>
 		<string>{0, 389}</string>
 		<string>{297, 9}</string>
 		<dict>
@@ -7551,9 +7551,9 @@
     s = 0;
 }</string>
 		</dict>
-		<real>327810315.133834</real>
-		<string>{0, 430}</string>
-		<string>{309, 0}</string>
+		<real>327814675.868999</real>
+		<string>{0, 471}</string>
+		<string>{425, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8026,9 +8026,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>327809796.28797102</real>
-		<string>{0, 1104}</string>
-		<string>{846, 30}</string>
+		<real>327813782.82154799</real>
+		<string>{0, 1241}</string>
+		<string>{980, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -13008,7 +13008,7 @@
 				<integer>896</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>327810274.71888798</real>
+			<real>327814655.33553898</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -13019,7 +13019,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 7:24 PM</string>
+		<string>Today at 8:37 PM</string>
 		<integer>106</integer>
 		<dict>
 			<key>$class</key>
@@ -22343,10 +22343,10 @@
 				</dict>
 			</array>
 		</dict>
-		<real>327810315.13828301</real>
-		<string>{5325, 2045}</string>
-		<string>{7361, 0}</string>
-		<string>WordMuncher::printStrcutOfWords()</string>
+		<real>327814675.87142599</real>
+		<string>{6685, 2226}</string>
+		<string>{8366, 0}</string>
+		<string>WordMuncher::printFrequencytOfWords()</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
 			<key>$class</key>
@@ -22667,9 +22667,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>327810315.13809597</real>
-		<string>{0, 430}</string>
-		<string>{309, 0}</string>
+		<real>327814675.87125498</real>
+		<string>{0, 471}</string>
+		<string>{425, 0}</string>
 		<string>main()</string>
 		<dict>
 			<key>$class</key>

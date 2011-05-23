@@ -9,14 +9,14 @@
 #include "WordMuncher.h"
 //Init Functions//
 
-WordMuncher::WordMuncher() {
-    debug = true;
+WordMuncher::WordMuncher(bool debuger) {
+    debug = debuger;
     counterparagraph = counterline = 0;
     //printTest();
 }
 
-WordMuncher::WordMuncher(string reg, string filename) {
-    debug = false;
+WordMuncher::WordMuncher(string reg, string filename, bool debuger) {
+    debug = debuger;
     counterparagraph = counterline = 1;
     theword.paratraph.push_back(counterparagraph);
     theword.line.push_back(counterline);
@@ -108,15 +108,15 @@ void WordMuncher::addWordToStruct(std::string word) {
     else {
 
         smatch what;
-        sregex wordNewLine = sregex::compile( "(\\w+)(\\.+)|(\\w+)(\\?)|(\\w+)(!)|(\\w+)(,)|(\\w+)(;)|(\\w+)(:)|(\\w+)(\\d+)" );
-        sregex wordDot = sregex::compile( "(\\w+)(\\.)" );
-        sregex wordDots = sregex::compile( "(\\w+)(\\.+)" );
-        sregex wordQuestion = sregex::compile( "(\\w+)(\\?)" );
-        sregex wordExclamation = sregex::compile( "(\\w+)(!)" );
-        sregex wordComa = sregex::compile( "(\\w+)(,)" );
-        sregex wordSemiColin = sregex::compile( "(\\w+)(;)" );  
-        sregex wordColin = sregex::compile( "(\\w+)(:)" );
-        sregex wordNumbers = sregex::compile( "(\\w+)(\\d+)" );
+        boost::xpressive::sregex wordNewLine = sregex::compile( "(\\w+)(\\.+)|(\\w+)(\\?)|(\\w+)(!)|(\\w+)(,)|(\\w+)(;)|(\\w+)(:)|(\\w+)(\\d+)" );
+        boost::xpressive::sregex wordDot = sregex::compile( "(\\w+)(\\.)" );
+        boost::xpressive::sregex wordDots = sregex::compile( "(\\w+)(\\.+)" );
+        boost::xpressive::sregex wordQuestion = sregex::compile( "(\\w+)(\\?)" );
+        boost::xpressive::sregex wordExclamation = sregex::compile( "(\\w+)(!)" );
+        boost::xpressive::sregex wordComa = sregex::compile( "(\\w+)(,)" );
+        boost::xpressive::sregex wordSemiColin = sregex::compile( "(\\w+)(;)" );  
+        boost::xpressive::sregex wordColin = sregex::compile( "(\\w+)(:)" );
+        boost::xpressive::sregex wordNumbers = sregex::compile( "(\\w+)(\\d+)" );
         if( regex_match( word, what, wordNewLine ) ) {
             if (regex_match(word, what, wordDot)) {
                 if(debug) {
@@ -199,19 +199,57 @@ void WordMuncher::addWordToStruct(std::string word) {
         if(debug) {
             cout << theword.str << " " << theword.frequency << " " << theword.syllables << " " <<  theword.paratraph[0] << " " << theword.line[0] << " " << endl;
         }
+        //Pushes words and finds most frequent word
         wordstrcut.push_back(theword);
-        
+        setFrequentWords();
     }
 
     
 }
     
-//void printStrcutOfWords() :: print out strcut of words
+//void printStrcutOfWords() : print out strcut of words
 void WordMuncher::printStrcutOfWords() {
     for(int i = 0; i < wordstrcut.size(); i++) {
         cout << "WORD " << i << ": "<< wordstrcut[i].str << endl;
         cout << "SYLB : " << wordstrcut[i].syllables << endl;
         cout << "PRGH : " << wordstrcut[i].paratraph[0] << endl;
         cout << "LINE : " << wordstrcut[i].line[0] << endl;
+        cout << endl;
     }
 }
+void WordMuncher::printFrequencytOfWords() {
+    for(int i = 0; i < wordstrcutfrequent.size(); i++) {
+        cout << "WORD " << i << ": "<< wordstrcutfrequent[i].str << endl;
+        cout << "FREQ : " << wordstrcutfrequent[i].frequency << endl;
+        cout << "SYLB : " << wordstrcutfrequent[i].syllables << endl;
+        cout << "PRGH : ";
+
+        for(int j = 0; j < wordstrcutfrequent[i].paratraph.size(); j++) {
+            cout << wordstrcutfrequent[i].paratraph[j] << " ";
+        }
+        cout << endl;
+     
+        cout << "LINE : ";
+        for(int j = 0; j < wordstrcutfrequent[i].line.size(); j++) {
+            cout << wordstrcutfrequent[i].line[j] << " ";
+        }
+        cout << endl << endl;
+    }
+}
+//void setFrequentWords() : find most frequent words
+void WordMuncher::setFrequentWords() { 
+    bool newword = true;
+    for(int i = 0; i < wordstrcutfrequent.size(); i++) {
+        if(wordstrcutfrequent[i].str == theword.str) {
+            wordstrcutfrequent[i].frequency ++;
+            wordstrcutfrequent[i].paratraph.push_back(counterparagraph);
+            wordstrcutfrequent[i].line.push_back(counterline);
+            newword = false;
+        }
+    }
+    if(newword) {
+        wordstrcutfrequent.push_back(theword);
+    }
+    
+}
+

@@ -24,7 +24,6 @@ using namespace boost;
 using namespace boost::xpressive;
 
 enum ERRORS {EMPTY, FULL};
-\
 
 
 
@@ -35,8 +34,8 @@ enum ERRORS {EMPTY, FULL};
 class WordMuncher {
 public:
     //INITS
-    WordMuncher();
-    WordMuncher(string reg,string filename);
+    WordMuncher(bool debuger = false);
+    WordMuncher(string reg,string filename, bool debuger = false);
     ~WordMuncher();
     //METHODS
     void readFileRegex(std::string reg, std::string filename);
@@ -44,7 +43,8 @@ public:
     void readWriteTokenizer(string reg, string text);
     void addWordToStruct(std::string word);
     void printStrcutOfWords();
-    
+    void setFrequentWords();
+    void printFrequencytOfWords();
     
 private:
     //DATA
@@ -52,6 +52,7 @@ private:
     string filenames;
     struct WORDS theword;
     vector<WORDS> wordstrcut;
+    vector<WORDS> wordstrcutfrequent;
     long int counterline;
     long int counterparagraph;
     bool debug;
