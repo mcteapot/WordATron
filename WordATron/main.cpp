@@ -26,7 +26,7 @@ int main (int argc, const char * argv[]) {
     //Load File
     WordMuncher wordmunch("\\w[\\w.]\\S+|\\w[\\w.]\\?|\\w[\\w+]", "example.txt");
     //wordmuch.printStrcutOfWords();
-    //wordmuch.printFrequencytOfWords();
+    wordmunch.printFrequencytOfWords();
     //wordmunch.setMostFrequentWords();
     //wordmunch.printMostFrequencytOfWords();
     //wordmuch().working();
