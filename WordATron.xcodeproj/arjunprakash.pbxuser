@@ -1,5 +1,55 @@
 // !$*UTF8*$!
 {
+	4700CEF5138B7DBA0000BC05 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4752D674138B712300C679A0 /* words.h */;
+		name = "words.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1506;
+		vrLoc = 378;
+	};
+	4700CEF6138B7DBA0000BC05 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4752D673138B712300C679A0 /* words.cpp */;
+		name = "words.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 640;
+		vrLoc = 4361;
+	};
+	4700CEF7138B7DBA0000BC05 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4752D671138B712300C679A0 /* node.h */;
+		name = "node.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 457;
+		vrLoc = 0;
+	};
+	4700CEF8138B7DBA0000BC05 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4752D672138B712300C679A0 /* tree.h */;
+		name = "tree.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 540;
+		vrLoc = 8542;
+	};
+	4700CEF9138B7DBA0000BC05 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4752D672138B712300C679A0 /* tree.h */;
+		name = "tree.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 593;
+		vrLoc = 8489;
+	};
 	4732FD011384FA940054A350 /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 47E3FA23000001B700239475 /* WordATron */;
@@ -14,9 +64,9 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					341,
+					1349,
 					20,
-					48.16259765625,
+					48,
 					43,
 					43,
 					20,
@@ -31,8 +81,15 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 439;
-			PBXWorkspaceStateSaveDate = 439;
+			PBXPerProjectTemplateStateSaveDate = 327908716;
+			PBXWorkspaceStateSaveDate = 327908716;
+		};
+		perUserProjectItems = {
+			4700CEF5138B7DBA0000BC05 /* PBXTextBookmark */ = 4700CEF5138B7DBA0000BC05 /* PBXTextBookmark */;
+			4700CEF6138B7DBA0000BC05 /* PBXTextBookmark */ = 4700CEF6138B7DBA0000BC05 /* PBXTextBookmark */;
+			4700CEF7138B7DBA0000BC05 /* PBXTextBookmark */ = 4700CEF7138B7DBA0000BC05 /* PBXTextBookmark */;
+			4700CEF8138B7DBA0000BC05 /* PBXTextBookmark */ = 4700CEF8138B7DBA0000BC05 /* PBXTextBookmark */;
+			4700CEF9138B7DBA0000BC05 /* PBXTextBookmark */ = 4700CEF9138B7DBA0000BC05 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 47E3FA2C000001BB00239475 /* Source Control */;
 		userBuildSettings = {
@@ -43,6 +100,34 @@
 		executables = (
 			47E3FA23000001B700239475 /* WordATron */,
 		);
+	};
+	4752D671138B712300C679A0 /* node.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1527, 1937}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 457}";
+		};
+	};
+	4752D672138B712300C679A0 /* tree.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1527, 5603}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{8489, 593}";
+		};
+	};
+	4752D673138B712300C679A0 /* words.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1527, 3523}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{4361, 640}";
+		};
+	};
+	4752D674138B712300C679A0 /* words.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1527, 949}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{378, 1506}";
+		};
 	};
 	47E3FA23000001B700239475 /* WordATron */ = {
 		isa = PBXExecutable;
@@ -60,6 +145,7 @@
 		dataTipSortType = 0;
 		debuggerPlugin = GDBDebugging;
 		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
 		enableDebugStr = 1;
 		environmentEntries = (
 		);
@@ -67,6 +153,8 @@
 		executableUserSymbolLevel = 0;
 		libgmallocEnabled = 0;
 		name = WordATron;
+		savedGlobals = {
+		};
 		showTypeColumn = 0;
 		sourceDirectories = (
 		);

@@ -8,8 +8,13 @@
 
 
 #include <iostream>
+#include <string.h>
+#include <stdio.h>
+#include <string>
 
 #include "WordMuncher.h"
+#include "tree.h"
+#include "heap.h"
 
 using namespace std;
 //Data
@@ -17,6 +22,10 @@ bool sorting = true;
 bool display = false;
 bool working = true;
 int chooseNum = 0;
+
+struct AWORD awords;
+struct AWORD bwords;
+
 //Functions Declaratons
 void menu();
 
@@ -24,18 +33,61 @@ int main (int argc, const char * argv[]) {
     
     cout << "********WordATron 0.01********" <<endl;
     //Load File
-    WordMuncher wordmunch("\\w[\\w.]\\S+|\\w[\\w.]\\?|\\w[\\w+]", "example.txt");
-    //wordmuch.printStrcutOfWords();
-    wordmunch.printFrequencytOfWords();
+    
+    tree<string> test2;
+
+    
+    //WordMuncher wordmunch("\\w[\\w.]\\S+|\\w[\\w.]\\?|\\w[\\w+]", "example.txt");
+    
+    /*
+    test2.insert("john");
+    test2.insert("john");
+    test2.insert("mandy");
+    test2.insert("buff");
+    test2.insert("apples");
+    test2.insert("ZeBra");    
+    
+    cout << "\nIn Order: \n";
+    test2.setTraverse(IN);
+    test2.print();
+    cout << endl;
+     */
+    //wordmunch.printStrcutOfWords();
+    //wordmunch.printFrequencytOfWords();
     //wordmunch.setMostFrequentWords();
     //wordmunch.printMostFrequencytOfWords();
     //wordmuch().working();
+    /*
+    MinHeap<AWORD> testHeap;
+    awords.str = "boobs";
+    testHeap.push(awords);
+     */
     
+     MinHeap<string> testHeap;
+    string awords = "boobls";
+    testHeap.push(awords);
+    awords = "oobls";
+    testHeap.push(awords);
+    awords = "zebra";
+    testHeap.push(awords);
+    awords = "fist";
+    testHeap.push(awords);
+    awords = "fist";
+    testHeap.push(awords);
+    awords = "poop";
+    testHeap.push(awords);
+    
+    testHeap.debug();
+    testHeap.debug();
+    testHeap.printInOrder();
+    //cout << awords.str << endl;
     //Main Menu//
+    /*
     while (working) {
         menu();
     }
-    
+    */
+    cout << "********WordATron 0.01********" <<endl;
     return 0;
 
 }

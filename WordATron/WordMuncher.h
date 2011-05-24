@@ -14,7 +14,7 @@
 #include <boost/xpressive/xpressive.hpp>
 #include <string>
 #include <fstream>
-
+#include <algorithm>
 
 #include "AWord.h"
 
@@ -24,11 +24,6 @@ using namespace boost;
 using namespace boost::xpressive;
 
 enum ERRORS {EMPTY, FULL};
-
-
-
-
-
 
 
 class WordMuncher {
@@ -47,6 +42,9 @@ public:
     void printFrequencytOfWords();
     void setMostFrequentWords();
     void printMostFrequencytOfWords();
+    
+    void strLowerCase(string &astr);
+    void firstLetterUpperCase(string &astr);
     
 private:
     //DATA

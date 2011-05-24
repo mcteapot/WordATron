@@ -108,6 +108,7 @@ void WordMuncher::addWordToStruct(std::string word) {
     else {
 
         smatch what;
+        bool setchecker = true;
         boost::xpressive::sregex wordNewLine = sregex::compile( "(\\w+)(\\.+)|(\\w+)(\\?)|(\\w+)(!)|(\\w+)(,)|(\\w+)(;)|(\\w+)(:)|(\\w+)(\\d+)" );
         boost::xpressive::sregex wordDot = sregex::compile( "(\\w+)(\\.)" );
         boost::xpressive::sregex wordDots = sregex::compile( "(\\w+)(\\.+)" );
@@ -117,6 +118,7 @@ void WordMuncher::addWordToStruct(std::string word) {
         boost::xpressive::sregex wordSemiColin = sregex::compile( "(\\w+)(;)" );  
         boost::xpressive::sregex wordColin = sregex::compile( "(\\w+)(:)" );
         boost::xpressive::sregex wordNumbers = sregex::compile( "(\\w+)(\\d+)" );
+        boost::xpressive::sregex wordFinalCheck = sregex::compile( "(\\w+)([^a-zA-Z0-9-\\s]+)" );
         if( regex_match( word, what, wordNewLine ) ) {
             if (regex_match(word, what, wordDot)) {
                 if(debug) {
@@ -177,13 +179,28 @@ void WordMuncher::addWordToStruct(std::string word) {
                 }
                 word = what[1];
             }
+            setchecker = false;
             
         } 
+        if(setchecker) {
+            if (regex_match(word, what, wordFinalCheck)) {
+                if(debug) {
+                    std::cout << "LAST CASE FIXED:"<< what[1] << '\n';
+                }
+                word = what[1];
+                counterline ++;
+            }
+        
+        }
         if(word !="") {
             if(debug) {
                 cout <<word<< " ADD WORD TO VECTOR" << endl;
                 
             }
+            //Changing cases
+            strLowerCase(word);
+            firstLetterUpperCase(word);
+            //Push out to word struct
             theword.str = word;
             theword.frequency = 1;
             if((int)(word.size()%3) == 0) {
@@ -199,7 +216,7 @@ void WordMuncher::addWordToStruct(std::string word) {
         if(debug) {
             cout << theword.str << " " << theword.frequency << " " << theword.syllables << " " <<  theword.paratraph[0] << " " << theword.line[0] << " " << endl;
         }
-        //Pushes words and finds most frequent word
+        //Pushes words and finds most frequent word, Where tree should be inserted
         wordstrcut.push_back(theword);
         setFrequentWords();
     }
@@ -305,4 +322,18 @@ void WordMuncher::printMostFrequencytOfWords() {
         }
         cout << endl << endl;
     }
+}
+//void strLowerCase(string &astr) : coverts string to lower case
+void WordMuncher::strLowerCase(string &astr) {
+    const int length = (int)(astr.length());
+	for(int i=0; i < length; ++i)
+	{
+		astr[i] = tolower(astr[i]);
+	}
+
+}
+
+//void firstLetterUpperCase(string &astr);
+void WordMuncher::firstLetterUpperCase(string &astr) {
+    astr[0] = toupper(astr[0]);
 }
