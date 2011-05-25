@@ -23,6 +23,7 @@ using namespace std;
 using namespace boost;
 using namespace boost::xpressive;
 
+
 enum ERRORS {EMPTY, FULL};
 
 
@@ -46,6 +47,8 @@ public:
     void strLowerCase(string &astr);
     void firstLetterUpperCase(string &astr);
     
+    long int getTotoalWords();
+    
 private:
     //DATA
     string regex;
@@ -54,6 +57,7 @@ private:
     vector<AWORD> wordstrcut;
     vector<AWORD> wordstrcutfrequent;
     vector<AWORD> wordstrcutmostfrequent;
+    long int totalWords;
     long int counterline;
     long int counterparagraph;
     bool debug;

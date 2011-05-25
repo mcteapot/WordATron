@@ -11,6 +11,7 @@
 
 
 #include <vector>
+#include "AWord.h"
 
 
 typedef int Index;
@@ -49,7 +50,7 @@ void MinHeap<T>::push( const T& x ) {
 	Index cur = ( nodes.size() - 1 ),
 		parent;
 
-	// bubble up into place
+	// bubble up into place a.operator+ (b);
 	while ( exists(parent = parentOf(cur)) &&  (x < nodes[parent]) ) { 
 		//heap is out of order, swap parent down to make room, and move up
 		nodes[cur] = nodes[parent];

@@ -11,13 +11,15 @@
 
 WordMuncher::WordMuncher(bool debuger) {
     debug = debuger;
-    counterparagraph = counterline = 0;
+    counterparagraph = totalWords = 0; 
+    counterline = 1;
     //printTest();
 }
 
 WordMuncher::WordMuncher(string reg, string filename, bool debuger) {
     debug = debuger;
-    counterparagraph = counterline = 1;
+    counterparagraph = totalWords = 0;
+    counterline = 1;
     theword.paratraph.push_back(counterparagraph);
     theword.line.push_back(counterline);
     filenames = filename;
@@ -203,7 +205,7 @@ void WordMuncher::addWordToStruct(std::string word) {
             //Push out to word struct
             theword.str = word;
             theword.frequency = 1;
-            if((int)(word.size()%3) == 0) {
+            if((int)(word.size()/3) == 0) {
                 theword.syllables = 1;
             
             }else {
@@ -217,6 +219,7 @@ void WordMuncher::addWordToStruct(std::string word) {
             cout << theword.str << " " << theword.frequency << " " << theword.syllables << " " <<  theword.paratraph[0] << " " << theword.line[0] << " " << endl;
         }
         //Pushes words and finds most frequent word, Where tree should be inserted
+        totalWords ++;
         wordstrcut.push_back(theword);
         setFrequentWords();
     }
@@ -333,7 +336,13 @@ void WordMuncher::strLowerCase(string &astr) {
 
 }
 
-//void firstLetterUpperCase(string &astr);
+//void firstLetterUpperCase(string &astr) : changed the first letter of a sring to upper
 void WordMuncher::firstLetterUpperCase(string &astr) {
     astr[0] = toupper(astr[0]);
+}
+
+//long int getTotoalWords() : 
+long int WordMuncher::getTotoalWords() {
+    return totalWords;
+
 }

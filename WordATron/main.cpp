@@ -13,6 +13,7 @@
 #include <string>
 
 #include "WordMuncher.h"
+#include "AWord.h"
 #include "tree.h"
 #include "heap.h"
 
@@ -25,6 +26,7 @@ int chooseNum = 0;
 
 struct AWORD awords;
 struct AWORD bwords;
+vector<AWORD> awordstrcut;
 
 //Functions Declaratons
 void menu();
@@ -33,13 +35,26 @@ int main (int argc, const char * argv[]) {
     
     cout << "********WordATron 0.01********" <<endl;
     //Load File
+    WordMuncher wordmunch("\\w[\\w.]\\S+|\\w[\\w.]\\?|\\w[\\w+]", "example.txt");
     
-    tree<string> test2;
-
+    //wordmunch.printStrcutOfWords();
+    //wordmunch.printFrequencytOfWords();
+    //wordmunch.setMostFrequentWords();
+    //wordmunch.printMostFrequencytOfWords();
+    //cout << "TOTAL WORDS: " << wordmunch.getTotoalWords() << endl;
     
-    //WordMuncher wordmunch("\\w[\\w.]\\S+|\\w[\\w.]\\?|\\w[\\w+]", "example.txt");
-    
-    /*
+    /*//Struct compare test
+    //tree<string> test2;
+    vector<AWORD> awordstrcut;
+    awords.str = "apple";
+    bwords.str = "zebra";
+    awordstrcut.push_back(bwords);
+    cout << awords.str << " < ";
+    cout << awordstrcut[0].str << endl;  
+    if(awords < awordstrcut[0]) {cout<<"WORKING"<<endl;}
+    */
+        
+    /*//Tree test
     test2.insert("john");
     test2.insert("john");
     test2.insert("mandy");
@@ -52,18 +67,26 @@ int main (int argc, const char * argv[]) {
     test2.print();
     cout << endl;
      */
-    //wordmunch.printStrcutOfWords();
-    //wordmunch.printFrequencytOfWords();
-    //wordmunch.setMostFrequentWords();
-    //wordmunch.printMostFrequencytOfWords();
-    //wordmuch().working();
-    /*
-    MinHeap<AWORD> testHeap;
-    awords.str = "boobs";
-    testHeap.push(awords);
-     */
     
-     MinHeap<string> testHeap;
+    /*//Heap strcut test
+    MinHeap<AWORD> testHeap;
+    
+    awords.str = "apples";
+    testHeap.push(awords);
+    awords.str = "bananas";
+    testHeap.push(awords);
+    awords.str = "bees";
+    testHeap.push(awords);
+    awords.str = "lebra";
+    testHeap.push(awords);
+    awords.str = "clear";
+    testHeap.push(awords);
+    testHeap.debug();
+    //testHeap.printInOrder();
+    */
+    
+    /*//Heap test
+    MinHeap<string> testHeap;
     string awords = "boobls";
     testHeap.push(awords);
     awords = "oobls";
@@ -78,10 +101,11 @@ int main (int argc, const char * argv[]) {
     testHeap.push(awords);
     
     testHeap.debug();
-    testHeap.debug();
     testHeap.printInOrder();
-    //cout << awords.str << endl;
+    */
+    
     //Main Menu//
+    
     /*
     while (working) {
         menu();

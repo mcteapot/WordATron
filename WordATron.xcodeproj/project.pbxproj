@@ -10,6 +10,7 @@
 		4732FD0F1384FA940054A350 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4732FD0E1384FA940054A350 /* main.cpp */; };
 		4752D675138B712300C679A0 /* words.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4752D673138B712300C679A0 /* words.cpp */; };
 		4759890F138BA5C2000858D5 /* WordOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4759890D138BA5C2000858D5 /* WordOut.cpp */; };
+		47598912138C701B000858D5 /* AWord.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 47598910138C701B000858D5 /* AWord.cpp */; };
 		47649C441388887D00216095 /* WordMuncher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 47649C421388887D00216095 /* WordMuncher.cpp */; };
 /* End PBXBuildFile section */
 
@@ -33,9 +34,10 @@
 		4752D672138B712300C679A0 /* tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tree.h; sourceTree = "<group>"; };
 		4752D673138B712300C679A0 /* words.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = words.cpp; sourceTree = "<group>"; };
 		4752D674138B712300C679A0 /* words.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = words.h; sourceTree = "<group>"; };
-		4759890C138B885D000858D5 /* heap.h */ = {isa = PBXFileReference; fileEncoding = 4; path = heap.h; sourceTree = "<group>"; };
+		4759890C138B885D000858D5 /* heap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = heap.h; sourceTree = "<group>"; };
 		4759890D138BA5C2000858D5 /* WordOut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WordOut.cpp; sourceTree = "<group>"; };
 		4759890E138BA5C2000858D5 /* WordOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordOut.h; sourceTree = "<group>"; };
+		47598910138C701B000858D5 /* AWord.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWord.cpp; sourceTree = "<group>"; };
 		47649C1D1385D12600216095 /* AWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWord.h; sourceTree = "<group>"; };
 		47649C421388887D00216095 /* WordMuncher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WordMuncher.cpp; sourceTree = "<group>"; };
 		47649C431388887D00216095 /* WordMuncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordMuncher.h; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				47649C431388887D00216095 /* WordMuncher.h */,
 				4759890D138BA5C2000858D5 /* WordOut.cpp */,
 				4759890E138BA5C2000858D5 /* WordOut.h */,
+				47598910138C701B000858D5 /* AWord.cpp */,
 			);
 			path = WordATron;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 				47649C441388887D00216095 /* WordMuncher.cpp in Sources */,
 				4752D675138B712300C679A0 /* words.cpp in Sources */,
 				4759890F138BA5C2000858D5 /* WordOut.cpp in Sources */,
+				47598912138C701B000858D5 /* AWord.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

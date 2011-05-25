@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include <string.h>
 
 using namespace std;
@@ -24,27 +25,30 @@ struct AWORD {
     vector<long int> line;
     
     //TODO to make a true compare need to be the same case, upper case will throw it off
-
-    bool operator<(AWORD& other) {
-        
-        return (strcmp(str.c_str(), other.str.c_str()) < 0);
     
-    }
-/*
+    //friend bool operator<(const AWORD &me,const AWORD& other) {
+      //  cout << "lessthan" << endl;
+    //return (me.str < other.str);
+        
+    //}
+    
+    
+    friend bool operator<(const AWORD &me, AWORD &other);
+    friend ostream& operator<<(ostream& out, const AWORD &me);
+    /*    
     bool operator>(AWORD& other) {
-        
-        return (strcmp(str.c_str(), other.str.c_str()) > 0);
-        
-    }
-    bool operator=(AWORD& other) {
-        
-        return (strcmp(str.c_str(), other.str.c_str()) != 0);
+        cout << "greaterthan" << endl;
+        return (str > other.str);
         
     }
- */
-};
+    bool operator==(AWORD& other) {
+        cout << "equal" << endl;
+        return (str == other.str);
+        
+    }
+    */
 
-//bool operator< ( const AWORD& a, const AWORD& b) { return (strcmp(a.str.c_str(), b.str.c_str()) < 0); }
+};
 
 
 
