@@ -114,6 +114,7 @@ string WordOut<T>::fileName()
 template <typename T>
 void WordOut<T>::fillWithTree(tree<T> &aTree)
 {
+
     if(!wRoot)
         wRoot = aTree.getRoot();
     if(wRoot)
@@ -127,7 +128,8 @@ void WordOut<T>::fillWithTree(tree<T> &aTree)
     }
     else
         return;
-}
+
+ }
 
 //void fillWithHeap(MinHeap<T> &aHeap)
 

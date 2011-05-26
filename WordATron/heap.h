@@ -17,7 +17,7 @@
 typedef int Index;
 
 template <typename T>
-class MinHeap {
+class Heap {
 	public:
 		std::vector<T> nodes;
 
@@ -43,7 +43,7 @@ class MinHeap {
 
 
 template <typename T>
-void MinHeap<T>::push( const T& x ) {
+void Heap<T>::push( const T& x ) {
 	// stick it in at the bottom (last slot, next open leaf) / make room there
 	nodes.push_back(x);
 
@@ -60,7 +60,7 @@ void MinHeap<T>::push( const T& x ) {
 }
 	
 template <typename T>
-void MinHeap<T>::pop() {
+void Heap<T>::pop() {
 	// removing the root
 
 	// start by swapping the last leaf into the root, then letting it cascade down into place
@@ -80,17 +80,17 @@ void MinHeap<T>::pop() {
 }
 
 template <typename T>
-T& MinHeap<T>::top() {
+T& Heap<T>::top() {
 	return nodes.front();
 }
 
 template <typename T>
-bool MinHeap<T>::isEmpty() {
+bool Heap<T>::isEmpty() {
 	return nodes.empty();
 }
 
 template <typename T>
-Index MinHeap<T>::parentOf(Index i) {
+Index Heap<T>::parentOf(Index i) {
     // because the heap is a "complete" binary tree, and stored such,
     // we can compute the parent instead of storing a pointer (, or worse - searching *shudder*)
     return ( ( (i + 1)  // convert to one-based indexes
@@ -99,11 +99,11 @@ Index MinHeap<T>::parentOf(Index i) {
 }
 
 template <typename T>
-Index MinHeap<T>::smallestChildOf(Index i) {
+Index Heap<T>::smallestChildOf(Index i) {
     // get the child indexes
     Index left = ( ( ( i +1) 
                        << 1)
-                        - 1); // see MinHeap::paretnOf(Index i) for full rationalization
+                        - 1); // see Heap::paretnOf(Index i) for full rationalization
     Index right = left +1;
                 
     if (exists(right)) {
@@ -116,14 +116,14 @@ Index MinHeap<T>::smallestChildOf(Index i) {
 }    
 
 template <typename T>
-bool MinHeap<T>::exists(Index i) {
+bool Heap<T>::exists(Index i) {
     return ((i >=0 ) && (i < nodes.size()));
 } 
 
 #include <iostream>
 template <typename T>
-void MinHeap<T>::debug() {
-	std::cout << "debugging MinHeap #" << this << "\n";
+void Heap<T>::debug() {
+	std::cout << "debugging Heap #" << this << "\n";
 	for (int i = 0; i < (int)nodes.size(); i++) {
         //TODO
 		std::cout << nodes[i] << ", ";
@@ -131,8 +131,8 @@ void MinHeap<T>::debug() {
 	std::cout << "\n\n";
 }
 template <typename T>
-void MinHeap<T>::printInOrder() {
-    std::cout << "debugging MinHeap #" << this << "\n";
+void Heap<T>::printInOrder() {
+    std::cout << "debugging Heap #" << this << "\n";
 	for ( ; ! isEmpty(); pop() ) {
         //TODO
         std::cout << top() << ", ";

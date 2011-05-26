@@ -230,15 +230,28 @@ void WordMuncher::addWordToStruct(std::string word) {
     
 }
 //void setTreeSructOfWords() 
-void WordMuncher::setTreeSructOfWords(tree<string> &theTree) {
+void WordMuncher::setTreeSructOfWords(tree<string> &thetree) {
     for(int i = 0; i < wordstrcut.size(); i++) {
-        theTree.insert(wordstrcut[i].str, wordstrcut[i].paratraph[0], wordstrcut[i].line[0], wordstrcut[i].syllables);
-        /*
-        cout << "WORD : " << wordstrcut[i].str << endl;
-        cout << "SYLB : " << wordstrcut[i].syllables << endl;
-        cout << "PRGH : " << wordstrcut[i].paratraph[0] << endl;
-        cout << "LINE : " << wordstrcut[i].line[0] << endl;
-         */
+        thetree.insert(wordstrcut[i].str, wordstrcut[i].paratraph[0], wordstrcut[i].line[0], wordstrcut[i].syllables);
+        if(debug) {
+            cout << "WORD : " << wordstrcut[i].str << endl;
+            cout << "SYLB : " << wordstrcut[i].syllables << endl;
+            cout << "PRGH : " << wordstrcut[i].paratraph[0] << endl;
+            cout << "LINE : " << wordstrcut[i].line[0] << endl;
+        }
+    }
+
+}
+//void setHeapSructOfWords(Heap<AWORD> &theheap);
+void WordMuncher::setHeapSructOfWords(Heap<AWORD> &theheap) {
+    for(int i = 0; i < wordstrcut.size(); i++) {
+        theheap.push(wordstrcut[i]);
+        if(debug) {
+            cout << "WORD : " << wordstrcut[i].str << endl;
+            cout << "SYLB : " << wordstrcut[i].syllables << endl;
+            cout << "PRGH : " << wordstrcut[i].paratraph[0] << endl;
+            cout << "LINE : " << wordstrcut[i].line[0] << endl;
+        }
     }
 
 }

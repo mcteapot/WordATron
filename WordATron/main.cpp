@@ -11,6 +11,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <string>
+#include <cstdlib>
+#include <math.h>
+#include <sys/time.h>  
 
 #include "WordMuncher.h"
 #include "AWord.h"
@@ -27,6 +30,7 @@ bool sorting = true;
 bool display = false;
 bool working = true;
 int chooseNum = 0;
+double elapsedTime;
 
 
 //Functions Declaratons
@@ -42,18 +46,29 @@ int main (int argc, const char * argv[]) {
     //WordOut<string> wordsaver();
     WordOut<string> wordsaver((int)(wordmunch.getTotoalWords()), (int)(wordmunch.getTotoalLines()));
     
+    //Timer Start
+    timeval t1, t2;
+    gettimeofday(&t1, NULL);
     
     //create Tree;
     tree<string> thetree;
     wordmunch.setTreeSructOfWords(thetree);
     thetree.setTraverse(IN);
+    //wordsaver.fillWithTree(thetree);
     
     //TODO heap
-    //MinHeap<string> testHeap;
+    //Heap<AWORD> theheap;
+    //wordmunch.setHeapSructOfWords(theheap);
     
+    // stop timer
+    gettimeofday(&t2, NULL);
+    elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;      // sec to ms
+    elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   // us to ms
+    cout << elapsedTime << " ms." << endl << endl;
+        
     
-    //TODO set the timer now
-    wordsaver.setTime(12.0420);
+    //set timer 
+    wordsaver.setTime(elapsedTime);
     
     
     //debug
@@ -167,16 +182,15 @@ void menu() {
         chooseNum = 0;
     }
     if (display) {
-        cout << "1: SHOW TOP 10" << endl;
+        cout << "1: SHOW INFO" << endl;
         cout << "2: CHOOSE LETTER" << endl;
-        cout << "3: READING LEVEL" << endl;
-        cout << "4: SAVE & QUIT" << endl;
-        cout << "5: QUIT" << endl;
+        cout << "3: SAVE & QUIT" << endl;
+        cout << "4: QUIT" << endl;
         cin >> chooseNum;
         display = false;
     }
     if ((display == false)&&(chooseNum == 1)) {
-        cout << "--Shop Top 10" << endl << endl;
+        cout << "--Show Info" << endl << endl;
         display = true;
         chooseNum = 0;
     }
@@ -189,17 +203,12 @@ void menu() {
         chooseNum = 0;
     }
     if ((display == false)&&(chooseNum == 3)) {
-        cout << "--Reading Level" << endl << endl;
-        display = true;
-        chooseNum = 0;
-    }
-    if ((display == false)&&(chooseNum == 4)) {
         cout << "--Save & Quet" << endl << endl;
         display = true;
         working = false;
         chooseNum = 0;
     }
-    if ((display == false)&&(chooseNum == 5)) {
+    if ((display == false)&&(chooseNum == 4)) {
         cout << "--Quet" << endl << endl;
         display = true;
         working = false;

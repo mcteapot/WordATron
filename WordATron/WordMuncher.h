@@ -19,6 +19,7 @@
 #include "AWord.h"
 
 #include "tree.h"
+#include "heap.h"
 
 //function defentions
 using namespace std;
@@ -41,7 +42,8 @@ public:
     void readWriteTokenizer(string reg, string text);
     void addWordToStruct(std::string word);
     
-    void setTreeSructOfWords(tree<string> &theTree);
+    void setTreeSructOfWords(tree<string> &thetree);
+    void setHeapSructOfWords(Heap<AWORD> &theheap);
     
     void printStrcutOfWords();
     void setFrequentWords();
