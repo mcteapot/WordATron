@@ -57,6 +57,8 @@ public:
     long int getTotoalWords();
     long int getTotoalLines();
     long int getTotalParagraphs();
+    int getFrequentCount();
+    string getMostFrequent(int num);
     
 private:
     //DATA

@@ -20,6 +20,7 @@ template <typename T>
 class WordOut
 {
 public:
+    WordOut(int tWords, int totSentences, int toParag);
     WordOut(int tWords, int totSentences);
     WordOut();
     ~WordOut();
@@ -66,6 +67,8 @@ public:
 
     //converter for print letters
     string charConvert(char arg);//CONVERTS CHAR TO STRING
+    
+    void setMostFrequent(string aStr);
 
 private:
     fstream fout;
@@ -76,9 +79,11 @@ private:
     int tWords;
     int tSyllables;
     int tSentences;
-
+    int para;
+    
     vector< node<T>* > wordList;//Vector for TREE's nodes
     vector<T> heapList;
+    vector<string> mostFrequent;
 };
 
 template<typename T>
@@ -103,6 +108,22 @@ WordOut<T>::WordOut(int totalWords, int totalSentences)
     tSyllables = 0;
     //tSentences = 0;
     wRoot = NULL;
+    tWords = totalWords;
+    tSentences = totalSentences;
+    outputFile = "WordList.txt";
+    outputSummary = "PrintSummary.txt";
+    fout.open(outputFile.c_str(), ios::out | ios::trunc);
+}
+
+template <typename T>
+WordOut<T>::WordOut(int totalWords, int totalSentences, int toParag)
+{
+    totalTime = 0.0;
+    //tWords = 0;
+    tSyllables = 0;
+    //tSentences = 0;
+    wRoot = NULL;
+    para = toParag;
     tWords = totalWords;
     tSentences = totalSentences;
     outputFile = "WordList.txt";
@@ -226,7 +247,6 @@ void WordOut<T>::printWordCount(ostream &out)
 template <typename T>
 void WordOut<T>::printParagraphCount(ostream &out)
 {
-    int para = 1000;
     out << "Paragraphs: " << para << "." << endl;
 }
 
@@ -241,8 +261,10 @@ void WordOut<T>::printTopTen(ostream &out)
 {
     string temp = "The";
     out << "TOP TEN FREQUENTLY MOST USED WORDS:\n";
-    for(int i = 0; i < 10; i++)
-        out << "     " << temp << endl;
+    for(int i = 0; i < mostFrequent.size(); i++) {
+        out << mostFrequent[i] << ", ";
+    }
+    out << endl;
 }
 
 template <typename T>
@@ -341,6 +363,10 @@ void WordOut<T>::printEverything()
         wordList[i]->print(fout);
     }
     fout.close();
+}
+template<typename T>
+void WordOut<T>::setMostFrequent(string aStr) {
+    mostFrequent.push_back(aStr);
 }
 
 #endif //WORDOUT_H

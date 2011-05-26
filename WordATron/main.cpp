@@ -11,7 +11,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <string>
+#include <sstream>
 #include <cstdlib>
+#include <fstream>
 #include <math.h>
 #include <sys/time.h>  
 
@@ -24,6 +26,7 @@
 #include "WordOut.h"
 
 
+
 using namespace std;
 //Data
 bool sorting = true;
@@ -33,9 +36,10 @@ int chooseNum = 0;
 double elapsedTime;
 
 
-//Functions Declaratons
-void menu();
 
+//Functions Declaratons
+
+//MAIN FUNCTION
 int main (int argc, const char * argv[]) {
     
     cout << "********WordATron 0.01********" <<endl;
@@ -44,7 +48,7 @@ int main (int argc, const char * argv[]) {
     
     
     //WordOut<string> wordsaver();
-    WordOut<string> wordsaver((int)(wordmunch.getTotoalWords()), (int)(wordmunch.getTotoalLines()));
+    WordOut<string> wordsaver((int)(wordmunch.getTotoalWords()), (int)(wordmunch.getTotoalLines()),wordmunch.getTotalParagraphs());
     
     //Timer Start
     timeval t1, t2;
@@ -54,40 +58,24 @@ int main (int argc, const char * argv[]) {
     tree<string> thetree;
     wordmunch.setTreeSructOfWords(thetree);
     thetree.setTraverse(IN);
-    wordsaver.fillWithTree(thetree);
-    
-    //TODO heap
-    //Heap<AWORD> theheap;
-    //wordmunch.setHeapSructOfWords(theheap);
     
     // stop timer
     gettimeofday(&t2, NULL);
     elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;      // sec to ms
     elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   // us to ms
     //cout << elapsedTime << " ms." << endl << endl;
-        
     
+    wordsaver.fillWithTree(thetree);
     //set timer 
     wordsaver.setTime(elapsedTime);
-    
-    char aChar = 'A';
-    //debug
-    wordsaver.printSummary(cout);
-    //wordsaver.printLetters(aChar);
-    wordsaver.printLetters("A");
-    //thetree.print();
-    
-    
-    
 
+    wordmunch.setMostFrequentWords();
     
-    /*
-    while (working) {
-        menu();
+    for(int i = 0; i < wordmunch.getFrequentCount(); i++){
+        wordsaver.setMostFrequent(wordmunch.getMostFrequent(i));
     }
-    */
-    
-    
+     
+
     //MAIN MENU
     while(working) {
         if(sorting) {
@@ -99,11 +87,20 @@ int main (int argc, const char * argv[]) {
         }
         if ((sorting == false)&&(chooseNum == 1)) {
             cout << "--Tree1 Sort" << endl << endl;
+            //Start///
+            
+                      
+            //End///
             display = true;
             chooseNum = 0;
         }
         if ((sorting == false)&&(chooseNum == 2)) {
             cout << "--Heap Sort" << endl << endl;
+            //Start//
+            //TODO heap
+            //Heap<AWORD> theheap;
+            //wordmunch.setHeapSructOfWords(theheap);
+            //End//
             display = true;
             chooseNum = 0;
         }
@@ -117,19 +114,37 @@ int main (int argc, const char * argv[]) {
         }
         if ((display == false)&&(chooseNum == 1)) {
             cout << "--Show Info" << endl << endl;
+            //Start//
+            wordsaver.printSummary(cout);
+            cout << endl;
+            //End//
             display = true;
             chooseNum = 0;
         }
         if ((display == false)&&(chooseNum == 2)) {
             char chooseChar;
             cout << "--Choose Letter" << endl << endl;
+            //Start//
             cin >> chooseChar;
-            cout << "--Display " << chooseChar << endl << endl;
+            stringstream ss;
+            string s;
+            ss << chooseChar;
+            ss >> s;
+            cout << "--Display " << "a" << endl << endl;
+            wordsaver.printLetters(s);
+            cout << endl;
+            //End//
             display = true;
             chooseNum = 0;
         }
         if ((display == false)&&(chooseNum == 3)) {
             cout << "--Save & Quet" << endl << endl;
+            //Start//
+            fstream output;
+            output.open(wordsaver.getSummaryFile().c_str(),ios::out | ios::trunc);
+            wordsaver.printSummary(output);
+            output.close();
+            //End//
             display = true;
             working = false;
             chooseNum = 0;
@@ -140,66 +155,12 @@ int main (int argc, const char * argv[]) {
             working = false;
             chooseNum = 0;
         }
-    
-    
+        
+        
     }
     
     cout << "********WordATron 0.01********" <<endl;
     return 0;
-
-}
-
-//Function Defenetions
-void menu() {
-    if(sorting) {
-        cout << "1: TREE" << endl;
-        cout << "2: HEAP" << endl;
-        cin >> chooseNum;
-        sorting = false;
-        
-    }
-    if ((sorting == false)&&(chooseNum == 1)) {
-        cout << "--Tree1 Sort" << endl << endl;
-        display = true;
-        chooseNum = 0;
-    }
-    if ((sorting == false)&&(chooseNum == 2)) {
-        cout << "--Heap Sort" << endl << endl;
-        display = true;
-        chooseNum = 0;
-    }
-    if (display) {
-        cout << "1: SHOW INFO" << endl;
-        cout << "2: CHOOSE LETTER" << endl;
-        cout << "3: SAVE & QUIT" << endl;
-        cout << "4: QUIT" << endl;
-        cin >> chooseNum;
-        display = false;
-    }
-    if ((display == false)&&(chooseNum == 1)) {
-        cout << "--Show Info" << endl << endl;
-        display = true;
-        chooseNum = 0;
-    }
-    if ((display == false)&&(chooseNum == 2)) {
-        char chooseChar;
-        cout << "--Choose Letter" << endl << endl;
-        cin >> chooseChar;
-        cout << "--Display " << chooseChar << endl << endl;
-        display = true;
-        chooseNum = 0;
-    }
-    if ((display == false)&&(chooseNum == 3)) {
-        cout << "--Save & Quet" << endl << endl;
-        display = true;
-        working = false;
-        chooseNum = 0;
-    }
-    if ((display == false)&&(chooseNum == 4)) {
-        cout << "--Quet" << endl << endl;
-        display = true;
-        working = false;
-        chooseNum = 0;
-    }
     
 }
+

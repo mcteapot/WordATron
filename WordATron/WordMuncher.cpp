@@ -385,3 +385,11 @@ long int WordMuncher::getTotoalLines() {
 long int WordMuncher::getTotalParagraphs() {
     return counterparagraph;
 }
+int WordMuncher::getFrequentCount() {
+    return wordstrcutmostfrequent.size();
+}
+//string getMostFrequent(int num);
+string WordMuncher::getMostFrequent(int num) {
+    return wordstrcutmostfrequent[num].str;
+
+}
