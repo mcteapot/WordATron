@@ -15,7 +15,11 @@
 #include "WordMuncher.h"
 #include "AWord.h"
 #include "tree.h"
+#include "words.h"
+#include "node.h"
 #include "heap.h"
+#include "WordOut.h"
+
 
 using namespace std;
 //Data
@@ -24,9 +28,6 @@ bool display = false;
 bool working = true;
 int chooseNum = 0;
 
-struct AWORD awords;
-struct AWORD bwords;
-vector<AWORD> awordstrcut;
 
 //Functions Declaratons
 void menu();
@@ -37,6 +38,31 @@ int main (int argc, const char * argv[]) {
     //Load File
     WordMuncher wordmunch("\\w[\\w.]\\S+|\\w[\\w.]\\?|\\w[\\w+]", "example.txt");
     
+    
+    //WordOut<string> wordsaver();
+    WordOut<string> wordsaver((int)(wordmunch.getTotoalWords()), (int)(wordmunch.getTotoalLines()));
+    
+    
+    //create Tree;
+    tree<string> thetree;
+    wordmunch.setTreeSructOfWords(thetree);
+    thetree.setTraverse(IN);
+    
+    //TODO heap
+    //MinHeap<string> testHeap;
+    
+    
+    //TODO set the timer now
+    wordsaver.setTime(12.0420);
+    
+    
+    //debug
+    wordsaver.printSummary();
+    wordsaver.printLetters('a');
+    thetree.print();
+    
+    
+    
     //wordmunch.printStrcutOfWords();
     //wordmunch.printFrequencytOfWords();
     //wordmunch.setMostFrequentWords();
@@ -44,8 +70,10 @@ int main (int argc, const char * argv[]) {
     //cout << "TOTAL WORDS: " << wordmunch.getTotoalWords() << endl;
     
     /*//Struct compare test
-    //tree<string> test2;
+    struct AWORD awords;
+    struct AWORD bwords;
     vector<AWORD> awordstrcut;
+     
     awords.str = "apple";
     bwords.str = "zebra";
     awordstrcut.push_back(bwords);
@@ -55,12 +83,13 @@ int main (int argc, const char * argv[]) {
     */
         
     /*//Tree test
-    test2.insert("john");
-    test2.insert("john");
-    test2.insert("mandy");
-    test2.insert("buff");
-    test2.insert("apples");
-    test2.insert("ZeBra");    
+    tree<string> test2;
+    test2.insert("john", 3, 4, 1);
+    test2.insert("john", 5, 2, 1);
+    test2.insert("mandy", 2, 9, 2);
+    test2.insert("buff", 2, 12, 1);
+    test2.insert("apples", 111, 2, 5);
+    test2.insert("ZeBra", 12, 12, 6);    
     
     cout << "\nIn Order: \n";
     test2.setTraverse(IN);
@@ -70,7 +99,9 @@ int main (int argc, const char * argv[]) {
     
     /*//Heap strcut test
     MinHeap<AWORD> testHeap;
-    
+    struct AWORD awords;
+    struct AWORD bwords;
+     
     awords.str = "apples";
     testHeap.push(awords);
     awords.str = "bananas";

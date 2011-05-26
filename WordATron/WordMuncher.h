@@ -18,6 +18,8 @@
 
 #include "AWord.h"
 
+#include "tree.h"
+
 //function defentions
 using namespace std;
 using namespace boost;
@@ -38,6 +40,9 @@ public:
     void readIfStream(string reg, string filename);
     void readWriteTokenizer(string reg, string text);
     void addWordToStruct(std::string word);
+    
+    void setTreeSructOfWords(tree<string> &theTree);
+    
     void printStrcutOfWords();
     void setFrequentWords();
     void printFrequencytOfWords();
@@ -48,6 +53,7 @@ public:
     void firstLetterUpperCase(string &astr);
     
     long int getTotoalWords();
+    long int getTotoalLines();
     
 private:
     //DATA
@@ -58,6 +64,7 @@ private:
     vector<AWORD> wordstrcutfrequent;
     vector<AWORD> wordstrcutmostfrequent;
     long int totalWords;
+    long int totalLines;
     long int counterline;
     long int counterparagraph;
     bool debug;

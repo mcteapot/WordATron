@@ -12,14 +12,14 @@
 WordMuncher::WordMuncher(bool debuger) {
     debug = debuger;
     counterparagraph = totalWords = 0; 
-    counterline = 1;
+    counterline = totalLines = 1;
     //printTest();
 }
 
 WordMuncher::WordMuncher(string reg, string filename, bool debuger) {
     debug = debuger;
     counterparagraph = totalWords = 0;
-    counterline = 1;
+    counterline = totalLines = 1;
     theword.paratraph.push_back(counterparagraph);
     theword.line.push_back(counterline);
     filenames = filename;
@@ -128,6 +128,7 @@ void WordMuncher::addWordToStruct(std::string word) {
                 }
                 word = "";
                 counterline ++;
+                totalLines ++;
             }
             if (regex_match(word, what, wordDots)) {
                 if(debug) {
@@ -136,6 +137,7 @@ void WordMuncher::addWordToStruct(std::string word) {
                 }
                 word = what[1];
                 counterline ++;
+                totalLines ++;
             }
             if (regex_match(word, what, wordQuestion)) {
                 if(debug) {
@@ -144,6 +146,7 @@ void WordMuncher::addWordToStruct(std::string word) {
                 }
                 word = what[1];
                 counterline ++;
+                totalLines ++;
             }
             if (regex_match(word, what, wordExclamation)) {
                 if(debug) {
@@ -152,6 +155,7 @@ void WordMuncher::addWordToStruct(std::string word) {
                 }
                 word = what[1];
                 counterline ++;
+                totalLines ++;
             }
             if (regex_match(word, what, wordComa)) {
                 if(debug) {
@@ -190,7 +194,6 @@ void WordMuncher::addWordToStruct(std::string word) {
                     std::cout << "LAST CASE FIXED:"<< what[1] << '\n';
                 }
                 word = what[1];
-                counterline ++;
             }
         
         }
@@ -226,7 +229,19 @@ void WordMuncher::addWordToStruct(std::string word) {
 
     
 }
-    
+//void setTreeSructOfWords() 
+void WordMuncher::setTreeSructOfWords(tree<string> &theTree) {
+    for(int i = 0; i < wordstrcut.size(); i++) {
+        theTree.insert(wordstrcut[i].str, wordstrcut[i].paratraph[0], wordstrcut[i].line[0], wordstrcut[i].syllables);
+        /*
+        cout << "WORD : " << wordstrcut[i].str << endl;
+        cout << "SYLB : " << wordstrcut[i].syllables << endl;
+        cout << "PRGH : " << wordstrcut[i].paratraph[0] << endl;
+        cout << "LINE : " << wordstrcut[i].line[0] << endl;
+         */
+    }
+
+}
 //void printStrcutOfWords() : print out strcut of words
 void WordMuncher::printStrcutOfWords() {
     for(int i = 0; i < wordstrcut.size(); i++) {
@@ -344,5 +359,11 @@ void WordMuncher::firstLetterUpperCase(string &astr) {
 //long int getTotoalWords() : 
 long int WordMuncher::getTotoalWords() {
     return totalWords;
+
+}
+
+//long int getTotoalLines() :
+long int WordMuncher::getTotoalLines() {
+    return totalLines;
 
 }
