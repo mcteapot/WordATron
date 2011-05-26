@@ -19,40 +19,40 @@ enum TERROR { SET_TRAVERSE_ERROR, EMPTY_TREE };
 template<typename T>
 class tree
 {
-public:
-    tree();//default constructor
-    ~tree();//destructor
-    tree(const tree<T> &rhs);
-    tree<T> operator=(const tree<T> &rhs);
-    
-    void setTraverse(order x);//set traverse order. IN, PRE, POST
-    
-    int nodeCount();//how many different words
-    int totalItems();//how many total words
-    
-    //void insert(T item);//insert into tree
-    void insert(T word, int paragraph, int line, int syllables);
-    void remove(T item);//remove from tree
-    
-    void push(T item);//push into vector list
-    void pop(T item);//pop from vector list
-    
-    void print();//prints tree in specified order
-    void inOrder(node<T> *root);//in order traversal
-    void preOrder(node<T> *root);//pre order traversal
-    void postOrder(node<T> * root);//post order traversal
-    
-    node<T>* findNode(T key);//find in tree/vector list
-    bool isEmpty();//return true if empty
-    node<T>* getRoot() const;
-    
-private:
-    node<T> *root;
-    words<T> backend;
-    order orderValue;
-    void destroy(node<T> *root);
-    void copy(const tree<T> &other);
-    void cTraverse(const node<T> *oRoot);//node<T> *root);
+    public:
+        tree();//default constructor
+        ~tree();//destructor
+        tree(const tree<T> &rhs);
+        tree<T> operator=(const tree<T> &rhs);
+
+        void setTraverse(order x);//set traverse order. IN, PRE, POST
+
+        int nodeCount();//how many different words
+        int totalItems();//how many total words
+
+        //void insert(T item);//insert into tree
+        void insert(T word, int paragraph, int line, int syllables);
+        void remove(T item);//remove from tree
+
+        void push(T item);//push into vector list
+        void pop(T item);//pop from vector list
+
+        void print();//prints tree in specified order
+        void inOrder(node<T> *root);//in order traversal
+        void preOrder(node<T> *root);//pre order traversal
+        void postOrder(node<T> * root);//post order traversal
+
+        node<T>* findNode(T key);//find in tree/vector list
+        bool isEmpty();//return true if empty
+        node<T>* getRoot() const;
+
+    private:
+        node<T> *root;
+        words<T> backend;
+        order orderValue;
+        void destroy(node<T> *root);
+        void copy(const tree<T> &other);
+        void cTraverse(const node<T> *oRoot);//node<T> *root);
 };
 
 template<typename T>
@@ -65,12 +65,12 @@ template<typename T>
 node<T>* tree<T>::findNode(T key)
 {
     node<T> *p = root;
-    while ( (p != NULL) && (backend.stoupper(p->word) != backend.stoupper(key)) )
-        if ( backend.stoupper(p->word) > backend.stoupper(key) )
-            p = p->lt;
-        else
-            p = p->gt;
-    return p;
+       while ( (p != NULL) && (backend.stoupper(p->word) != backend.stoupper(key)) )
+         if ( backend.stoupper(p->word) > backend.stoupper(key) )
+           p = p->lt;
+         else
+           p = p->gt;
+       return p;
 }
 
 template<typename T>
@@ -92,7 +92,7 @@ void tree<T>::destroy(node<T> *root)//recursive
     {
         destroy(root->lt);
         destroy(root->gt);
-        
+
         delete root;
         root = NULL;
     }
@@ -175,14 +175,14 @@ void tree<T>::insert(T item, int paragraph, int line, int syllable)
 {
     node<T> *newNode = new node<T>;    
     node<T> *parent;//parent node
-    
+
     newNode->word = item;
     newNode->wordCounts();
     newNode->update(paragraph,line,syllable);
     newNode->lt = NULL;
     newNode->gt = NULL;
     parent = NULL;
-    
+
     if(!root)//isEmpty()
     {
         root = newNode;
@@ -225,11 +225,11 @@ template<typename T>
 void tree<T>::pop(T item)
 {
     /*
-     for (vector<string>::iterator i = preWordList.begin(); i != preWordList.end(); ++i)
-     {
-     if(*i == item)
-     preWordList.erase(i);
-     }*/
+    for (vector<string>::iterator i = preWordList.begin(); i != preWordList.end(); ++i)
+    {
+        if(*i == item)
+            preWordList.erase(i);
+    }*/
 }
 
 template<typename T>
@@ -242,7 +242,7 @@ void tree<T>::remove(T item)
     }
     node<T> *current, *parent = NULL;
     current = root;
-    
+
     while(current != NULL)
     {
         if(current->word == item)
@@ -304,11 +304,11 @@ void tree<T>::remove(T item)
             parent->lt = NULL;
         else
             parent->gt = NULL;
-        delete current;
+            delete current;
         return;
-        
+
     }
-    
+
     //node with two children. replace node with smallest node in right subtree
     if(current->lt != NULL && current->gt != NULL)
     {
@@ -355,13 +355,13 @@ void tree<T>::print()
 {
     switch(orderValue)
     {
-        case 0: inOrder(root);
+    case 0: inOrder(root);
             break;
-        case 1: preOrder(root);
+    case 1: preOrder(root);
             break;
-        case 2: postOrder(root);
+    case 2: postOrder(root);
             break;
-        default: throw SET_TRAVERSE_ERROR;
+    default: throw SET_TRAVERSE_ERROR;
     }
 }
 
@@ -372,9 +372,7 @@ void tree<T>::inOrder(node<T> *root)
     {
         if(root->lt)
             inOrder(root->lt);
-        root->print();//insertion
-        //backend.push(root->lt);
-        //backend.push(root->gt);
+        root->print(cout);//insertion
         if(root->gt)
             inOrder(root->gt);
     }
@@ -387,7 +385,7 @@ void tree<T>::preOrder(node<T> *root)
 {
     if(root)
     {
-        root->print();//insertion
+        root->print(cout);//insertion
         if(root->lt)
             preOrder(root->lt);
         if(root->gt)
@@ -406,7 +404,7 @@ void tree<T>::postOrder(node<T> * root)
             postOrder(root->lt);
         if(root->gt)
             postOrder(root->gt);
-        root->print();
+        root->print(cout);
     }
     else
         return;

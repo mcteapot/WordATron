@@ -21,7 +21,7 @@ struct node
     node<T> operator=(const node<T> &other);
     void copy(const node<T> &other);
     ~node();
-    
+
     T word;
     int wordCount;
     int syllables;
@@ -29,20 +29,20 @@ struct node
     {
         wordCount++;
     }
-    
+
     int totalSyllables()
     {
         return syllables*wordCount;
     }
-    
+
     vector< vector<int> > paragrahsLines;
-    
+
     bool isString(T item);
     void update(int paragraph, int line, int syllable);
-    void print();
-    
+    void print(ostream &out);
+
     node *lt, *gt;
-};
+ };
 
 template<typename T>
 node<T>::node(const node<T> &other)
@@ -66,7 +66,7 @@ void node<T>::copy(const node<T> &other)
     gt = other.gt;
     lt = other.lt;
     wordCount = other.wordCount;
-    
+
     vector<T> row;
     for(int i = 0; i < int(other.paragrahsLines.size()); i++)
     {
@@ -80,64 +80,66 @@ void node<T>::copy(const node<T> &other)
 }
 
 template<typename T>
-void node<T>::print()
+void node<T>::print(ostream &out)
 {
-    cout << "\n"<<word << "(" << wordCount<<") ";
-    
+    out << "\n"<<word <<endl<< "     count" << "["<<wordCount << "] ";
+
     for(int i = 0; i < int(paragrahsLines.size()); i++)
     {
         if(paragrahsLines[i].size() > 0)
         {
-            cout << i << ":";
+            out << "\n     :[" << i << "]: ";
             for(int k = 0; k < int(paragrahsLines[i].size()); k++)
-                cout<<paragrahsLines[i][k]<<" ";
+            {
+                out<<paragrahsLines[i][k] << " ";
+            }
         }
     }
 }
 
-template<typename T>
-node<T>::node()
-{
-    wordCount = 0;
-    syllables = 0;
-    lt = NULL;
-    gt = NULL;
-}
+ template<typename T>
+ node<T>::node()
+ {
+     wordCount = 0;
+     syllables = 0;
+     lt = NULL;
+     gt = NULL;
+ }
 
-template<typename T>
-node<T>::node(T data)//look over! possible issues with counter
-{
-    word = data;
-    syllables = 0;
-    wordCount++;
-    lt = NULL;
-    gt = NULL;
-}
+ template<typename T>
+ node<T>::node(T data)//look over! possible issues with counter
+ {
+     word = data;
+     syllables = 0;
+     wordCount++;
+     lt = NULL;
+     gt = NULL;
+ }
 
-template<typename T>
-node<T>::~node()
-{
-    lt = NULL;
-    gt = NULL;
-}
+ template<typename T>
+ node<T>::~node()
+ {
+     lt = NULL;
+     gt = NULL;
+ }
 
-template<typename T>
-void node<T>::update(int paragraph, int line, int syllable)
-{
-    syllables = syllable;
-    //cout << "paragrahsLines.size()-1:" << paragrahsLines.size()-1 << endl;
-    if( int(paragrahsLines.size()) == 0 || int((paragrahsLines.size()-1)) < paragraph )
-    {
-        //cout << "toDo: " << (paragraph+1) - paragrahsLines.size() << endl;
-        int toDo = (paragraph+1) - paragrahsLines.size();
+ template<typename T>
+ void node<T>::update(int paragraph, int line, int syllable)
+ {
+     syllables = syllable;
+     //cout << "paragrahsLines.size()-1:" << paragrahsLines.size()-1 << endl;
+     if( int(paragrahsLines.size()) == 0 || int((paragrahsLines.size()-1)) < paragraph )
+     {
+         //cout << "toDo: " << (paragraph+1) - paragrahsLines.size() << endl;
+         int toDo = (paragraph+1) - paragrahsLines.size();
         for(int i = 0; i < (toDo-1); i++)
         {
             vector<int> newRow;
-            for(int j = 0; j <= 1; j++)
-            {
-                //newRow.push_back('\0');
-                ;
-            }
+                for(int j = 0; j <= 1; j++)
+                {
+                    //newRow.push_back('\0');
+                    ;
+                }
             paragrahsLines.push_back(newRow);
         }
         vector<int> newRow2;
@@ -147,51 +149,51 @@ void node<T>::update(int paragraph, int line, int syllable)
     }
     else if( int((paragrahsLines.size()-1)) == paragraph )
     {
-        //cout << paragrahsLines[1].size() << endl;
-        paragrahsLines[paragraph].push_back(line);
-        //cout << paragrahsLines[1][1] << endl;
+      //cout << paragrahsLines[1].size() << endl;
+      paragrahsLines[paragraph].push_back(line);
+      //cout << paragrahsLines[1][1] << endl;
     }
     else
-    {
-        throw RECORD_ERROR;
-    }
-}
+     {
+         throw RECORD_ERROR;
+     }
+ }
 /*
  template<typename T>
  bool node<T>::operator<(node<T> lhs, node<T> rhs)
  {
- if(isString())
- {
- return (toUpper(lhs->word) < toUpper(rhs->word));
+     if(isString())
+     {
+         return (toUpper(lhs->word) < toUpper(rhs->word));
+     }
+     else
+     {
+         return (lhs < rhs);
+     }
  }
- else
- {
- return (lhs < rhs);
- }
- }
- 
+
  template<typename T>
  bool node<T>::operator==(node<T> lhs, node<T> rhs)
  {
- if(isString())
- {
- return( toUpper(lhs->word) == toUpper(rhs->word) );
- }
- else
- return( lhs->word == rhs->word );
- 
- }
- */
+     if(isString())
+     {
+         return( toUpper(lhs->word) == toUpper(rhs->word) );
+     }
+     else
+        return( lhs->word == rhs->word );
 
-template<typename T>
-bool node<T>::isString(T item)
-{
-    try
+ }
+*/
+
+ template<typename T>
+ bool node<T>::isString(T item)
+ {
+     try
     {
-        try
-        {
-            throw item;
-        }
+       try
+       {
+          throw item;
+       }
         catch(string x)
         {
             return true;
@@ -201,6 +203,6 @@ bool node<T>::isString(T item)
     {
         return false;
     }
-}
+ }
 
 #endif // NODE_H

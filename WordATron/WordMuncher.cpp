@@ -380,3 +380,8 @@ long int WordMuncher::getTotoalLines() {
     return totalLines;
 
 }
+
+//long int getTotalParagraphs();
+long int WordMuncher::getTotalParagraphs() {
+    return counterparagraph;
+}

@@ -28,48 +28,48 @@ enum rERRORS { FILE_IO_ERROR, FILE_DELETE_ERROR };
 template<typename T>
 class words
 {
-public:
-    words();//default constructor. Does nothing.
-    words(string fileName);//single arguement constructor. USE THIS ONE.
-    ~words();//destructor
-    
-    bool deleteFile();//deletes "outputFile"
-    void openFile(string fileName);//CHANGE FILE PATH FOR OUTSIDE USE
-    void print();//prints list of words without repeats and alphabetically, "outputFile"
-    
-    void sort();//sort vector list via linked list
-    void push(NType *item);//push a word into preWordList
-    void pop(NType *item);//remove word from sortedWordList
-    void initLinkList();//load linked list with words
-    void deLinkList();//destructor for linked list
-    void writeSortedListToFile();//write sorted linked list to file
-    void delRepeatsPreWordList();//creates a new list from preWordList with zero repeats (noRepsList).
-    
-    int wordCount();//returns the size of sortedWordList ... how many different words there are
-    int preWordSize()//return the preWordList size. Used for total words in the book
-    {
-        return preWordList.size();
-    }
-    int nodeCount()//returns how many different words there are.
-    {
-        return sortedWordList.size();
-    }
-    
-    string stoupper(string &str);//function that returns an uppercase string
-    bool search(string key, int list);//search preWordList (1) or sortedWordList (2) for a key word/node
-    bool find(string key);//search sortedWordList for a key/word
-    
-    
-    vector< NType > preWordList;
-    vector< NType > noRepsList;
-    vector< NType > sortedWordList;
-    
-protected:
-    
-private:
-    int size();
-    nodetype<T> *start, *last, *entry, *newnode;
-    string title, outputFile;
+    public:
+        words();//default constructor. Does nothing.
+        words(string fileName);//single arguement constructor. USE THIS ONE.
+        ~words();//destructor
+
+        bool deleteFile();//deletes "outputFile"
+        void openFile(string fileName);//CHANGE FILE PATH FOR OUTSIDE USE
+        void print();//prints list of words without repeats and alphabetically, "outputFile"
+
+        void sort();//sort vector list via linked list
+        void push(NType *item);//push a word into preWordList
+        void pop(NType *item);//remove word from sortedWordList
+        void initLinkList();//load linked list with words
+        void deLinkList();//destructor for linked list
+        void writeSortedListToFile();//write sorted linked list to file
+        void delRepeatsPreWordList();//creates a new list from preWordList with zero repeats (noRepsList).
+
+        int wordCount();//returns the size of sortedWordList ... how many different words there are
+        int preWordSize()//return the preWordList size. Used for total words in the book
+        {
+            return preWordList.size();
+        }
+        int nodeCount()//returns how many different words there are.
+        {
+            return sortedWordList.size();
+        }
+
+        string stoupper(string &str);//function that returns an uppercase string
+        bool search(string key, int list);//search preWordList (1) or sortedWordList (2) for a key word/node
+        bool find(string key);//search sortedWordList for a key/word
+
+
+        vector< NType > preWordList;
+        vector< NType > noRepsList;
+        vector< NType > sortedWordList;
+
+    protected:
+
+    private:
+        int size();
+        nodetype<T> *start, *last, *entry, *newnode;
+        string title, outputFile;
 };
 
 
@@ -97,17 +97,16 @@ words<T>::~words()
     preWordList.clear();
     sortedWordList.clear();
     noRepsList.clear();
-    //TODO
     //deLinkList();
 }
 
 template<typename T>
 void words<T>::deLinkList()
 {
-    nodetype<T> *current, *tmp;
-    
-    current = start->ptr;
-    start->ptr = NULL;
+     nodetype<T> *current, *tmp;
+
+     current = start->ptr;
+     start->ptr = NULL;
     while(current != NULL)
     {
         tmp = current->ptr;
@@ -120,17 +119,17 @@ template<typename T>
 void words<T>::initLinkList()
 {
     T info;
-    
+
     start = new nodetype<T>;
     start->ptr = NULL;
     last = start;
     //cout << "noRepsList.size(): " << noRepsList.size() << endl;
-    
+
     //for (vector< NType >::iterator i = noRepsList.begin(); i != noRepsList.end(); ++i)
     for(int i = 0; i < int(noRepsList.size()); i++)
     {
         info = noRepsList[i]->word;
-        
+
         newnode = new nodetype<T>;
         newnode->data = info;
         newnode->ptr = NULL;
@@ -154,7 +153,7 @@ void words<T>::openFile(string fileName)//CHANGE FILE PATH FOR OUTSIDE USE
     fstream file;
     string name;
     name = "C:\\Users\\Castillo\\Documents\\Qt C++\\Projects\\tree(2)\\" + fileName + ".txt";
-    
+
     file.open(name.c_str(), ios::in);
     if( !(file.is_open()) )
     {
@@ -180,8 +179,8 @@ void words<T>::print()
 template<typename T>
 void words<T>::writeSortedListToFile()
 {
-    fstream out;
-    
+     fstream out;
+
     out.open(outputFile.c_str(),ios::out | ios::trunc);
     if( !(out.is_open()) )
     {
@@ -189,17 +188,17 @@ void words<T>::writeSortedListToFile()
     }
     else
     {
-        entry = start->ptr;
-        while(entry != NULL)
-        {
-            sortedWordList.push_back(entry->data);
-            out << entry->data << endl;
-            entry = entry->ptr;
-        }
-        for(unsigned int i = 0; i < sortedWordList.size(); i++)
-        {
-            cout << sortedWordList[i]->word << endl;
-        }
+         entry = start->ptr;
+             while(entry != NULL)
+                 {
+                     sortedWordList.push_back(entry->data);
+                     out << entry->data << endl;
+                     entry = entry->ptr;
+                 }
+             for(unsigned int i = 0; i < sortedWordList.size(); i++)
+             {
+                 cout << sortedWordList[i]->word << endl;
+             }
     }
     out.close();
 }
@@ -208,7 +207,7 @@ template<typename T>
 void words<T>::delRepeatsPreWordList()
 {
     bool found = false;
-    
+
     noRepsList.push_back(preWordList[0]);
     //create a node with the word and incrememnt count here...
     //for(vector<NType>::iterator k = preWordList.begin(); k != preWordList.end(); ++k)
@@ -249,19 +248,19 @@ template<typename T>
 string words<T>::stoupper(string &str)
 {
     string temp;
-    for(unsigned int i = 0; i < str.length(); i++)
-    {
-        temp += toupper(str[i]);
-        //cout << "temp: " << temp << endl;
-    }
-    return temp;
+      for(unsigned int i = 0; i < str.length(); i++)
+      {
+          temp += toupper(str[i]);
+          //cout << "temp: " << temp << endl;
+      }
+      return temp;
 }
 
 template<typename T>
 void words<T>::sort()
 {
     nodetype<T> *next, *temp;
-    
+
     last = start->ptr;
     while(last != NULL)
     {
@@ -287,30 +286,30 @@ bool words<T>::search(string key, int list)//preWordList = 1, sortedWordList = 2
 {
     switch(list)
     {
-        case 1: //search preWordList
+    case 1: //search preWordList
+    {
+        for(int k = 0; k < int(preWordList.size()); k++)
+            cout << preWordList[k]->word << endl;
+        cout <<"preWordList.size(): " << preWordList.size() << endl;
+
+        //for (vector<NType>::iterator i = preWordList.begin(); i != preWordList.end(); ++i)
+        for(int i = 0; i < int(preWordList.size()); i++)
         {
-            for(int k = 0; k < int(preWordList.size()); k++)
-                cout << preWordList[k]->word << endl;
-            cout <<"preWordList.size(): " << preWordList.size() << endl;
-            
-            //for (vector<NType>::iterator i = preWordList.begin(); i != preWordList.end(); ++i)
-            for(int i = 0; i < int(preWordList.size()); i++)
+            if(stoupper(key) == stoupper(preWordList[i]->word))
             {
-                if(stoupper(key) == stoupper(preWordList[i]->word))
-                {
-                    cout << "key: " << key << endl << "*i: " << preWordList[i]->word << endl;
-                    return true;
-                }
+                cout << "key: " << key << endl << "*i: " << preWordList[i]->word << endl;
+                return true;
             }
-            return false;
         }
-            break;
-            
-            
-        case 2: //search sortedWordList
+        return false;
+    }
+        break;
+
+
+    case 2: //search sortedWordList
             return find(key);
             break;
-        default:
+    default:
             break;
     }
     return false;
@@ -321,7 +320,7 @@ bool words<T>::find(string key)
 {
     nodetype<T> *current;
     current = new nodetype<T>;
-    
+
     current = start->ptr;
     while( (current != NULL) && (stoupper(key) != stoupper(current->data->word)) )
     {
@@ -330,7 +329,7 @@ bool words<T>::find(string key)
     if(current == NULL)
     {
         delete current;
-        return false;
+         return false;
     }
     else
         delete current;

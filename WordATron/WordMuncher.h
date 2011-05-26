@@ -56,6 +56,7 @@ public:
     
     long int getTotoalWords();
     long int getTotoalLines();
+    long int getTotalParagraphs();
     
 private:
     //DATA
@@ -67,6 +68,7 @@ private:
     vector<AWORD> wordstrcutmostfrequent;
     long int totalWords;
     long int totalLines;
+    long int totalparagraphs;
     long int counterline;
     long int counterparagraph;
     bool debug;
