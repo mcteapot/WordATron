@@ -208,7 +208,7 @@ void WordOut<T>::addNode(T item, int aParagraph, int aLine, int aSyllables)
         saveMe->wordCounts();
         saveMe->update(aParagraph,aLine,aSyllables);
         wordList.push_back(saveMe);
-        delete saveMe;
+        //delete saveMe;
         
         AWORD *pushMe = new AWORD;
         pushMe->str = item;
@@ -218,7 +218,7 @@ void WordOut<T>::addNode(T item, int aParagraph, int aLine, int aSyllables)
         pushMe->line.push_back(aLine);
         prevHeapItem = item;
         heapList.push_back(pushMe);
-        delete pushMe;
+        //delete pushMe;
     }
     else
     {
