@@ -9,7 +9,7 @@
 #include "AWord.h"
 
 bool operator<(const AWORD &me, AWORD& other) {
-    cout << "lessthan" << endl;
+    //cout << "lessthan" << endl;
     return (me.str < other.str);    
 }
 

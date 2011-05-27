@@ -33,7 +33,8 @@ bool sorting = true;
 bool display = false;
 bool working = true;
 int chooseNum = 0;
-double elapsedTime;
+int chooseStruct = 0;
+double elapsedTime, elapsedTimeHeap;
 
 
 
@@ -50,6 +51,7 @@ int main (int argc, const char * argv[]) {
     //WordOut<string> wordsaver();
     WordOut<string> wordsaver((int)(wordmunch.getTotoalWords()), (int)(wordmunch.getTotoalLines()),wordmunch.getTotalParagraphs());
     
+    //TREEE
     //Timer Start
     timeval t1, t2;
     gettimeofday(&t1, NULL);
@@ -75,7 +77,30 @@ int main (int argc, const char * argv[]) {
         wordsaver.setMostFrequent(wordmunch.getMostFrequent(i));
     }
      
+    //HEAP
+    Heap<AWORD> theHeap;
+    //Timer Start
+    timeval th1, th2;
+    gettimeofday(&th1, NULL);
+    //Add To heap and heapafie
+    wordmunch.setHeapSructOfWords(theHeap);
+    //debug
+    theHeap.printInOrder();
+    // stop timer
+    gettimeofday(&th2, NULL);
+    elapsedTimeHeap = (th2.tv_sec - th1.tv_sec) * 1000.0;      // sec to ms
+    elapsedTimeHeap += (th2.tv_usec - th1.tv_usec) / 1000.0;   // us to ms
+    
+    //Create heaps Word out
+    WordOut<string> wordsaverHeap((int)(wordmunch.getTotoalWords()), (int)(wordmunch.getTotoalLines()),wordmunch.getTotalParagraphs());
+   
+    //theHeap.printInOrderToWordOut(wordsaverHeap);
+    //Insert Heapafined into wordout
+    //set tiem for heap time
 
+    wordsaverHeap.setTime(elapsedTime);
+    
+    
     //MAIN MENU
     while(working) {
         if(sorting) {
@@ -92,6 +117,7 @@ int main (int argc, const char * argv[]) {
                       
             //End///
             display = true;
+            chooseStruct = 1;
             chooseNum = 0;
         }
         if ((sorting == false)&&(chooseNum == 2)) {
@@ -102,6 +128,7 @@ int main (int argc, const char * argv[]) {
             //wordmunch.setHeapSructOfWords(theheap);
             //End//
             display = true;
+            chooseStruct = 2;
             chooseNum = 0;
         }
         if (display) {
@@ -115,7 +142,14 @@ int main (int argc, const char * argv[]) {
         if ((display == false)&&(chooseNum == 1)) {
             cout << "--Show Info" << endl << endl;
             //Start//
-            wordsaver.printSummary(cout);
+            if(chooseStruct == 1) {
+                wordsaver.printSummary(cout); 
+            }
+            if(chooseStruct == 2) { 
+                cout << "HEAP INFO" << endl;
+                wordsaver.printSummary(cout); 
+                //wordsaverHeap.printSummary(cout);
+            }
             cout << endl;
             //End//
             display = true;
@@ -130,8 +164,15 @@ int main (int argc, const char * argv[]) {
             string s;
             ss << chooseChar;
             ss >> s;
-            cout << "--Display " << "a" << endl << endl;
-            wordsaver.printLetters(s);
+            cout << "--Display " << s << endl << endl;
+            if(chooseStruct == 1) {
+                wordsaver.printLetters(s); 
+            }
+            if(chooseStruct == 2) { 
+                cout << "HEAP LETTERS" << endl;
+                wordsaver.printLetters(s);
+            }
+
             cout << endl;
             //End//
             display = true;
@@ -140,10 +181,17 @@ int main (int argc, const char * argv[]) {
         if ((display == false)&&(chooseNum == 3)) {
             cout << "--Save & Quet" << endl << endl;
             //Start//
-            fstream output;
-            output.open(wordsaver.getSummaryFile().c_str(),ios::out | ios::trunc);
-            wordsaver.printSummary(output);
-            output.close();
+            if(chooseStruct == 1) {
+                fstream output;
+                output.open(wordsaver.getSummaryFile().c_str(),ios::out | ios::trunc);
+                wordsaver.printSummary(output);
+                output.close();
+                wordsaver.printEverything();
+            }
+            if(chooseStruct == 2) { 
+                cout << "HEAP LETTERS" << endl;
+            }
+
             //End//
             display = true;
             working = false;

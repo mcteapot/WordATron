@@ -10,11 +10,11 @@
 #include <algorithm>
 
 #include "tree.h"
+#include "AWord.h"
 //#include "heap.h"
 
 using namespace std;
-#define fleschLevel(words,sentences,syllables) (206.835 - (1.015*(words/sentences)) - (84.6*(syllables/words)))
-//#define oType node<T>
+#define fleschLevel(words,sentences,syllables) (0.39*(words/sentences) + (11.8*(syllables/words)) - 15.59)
 
 template <typename T>
 class WordOut
@@ -24,21 +24,21 @@ public:
     WordOut(int tWords, int totSentences);
     WordOut();
     ~WordOut();
-
+    
     //Basic setters
     void setTime(float theTime);
     void setTotalSyllables(int totSyllables);
-
+    
     //object manipulation
     void fillWithTree(tree<T> &aTree);
     //walk down the tree
     void traverse(node<T> *root);
     //void fillWithHeap(MinHeap<T> &aHeap);
-
+    
     //node passing into vector
     void addNode(node<T> *aNode); // used by fillWithTree(tree aTree);
     void addNode(T item, int aParagraph, int aLine, int aSyllables); //  used by fillWithHeap(MinHeap aHeap);
-
+    
     //Basic print functions
     void printWordCount(ostream &out);
     void printParagraphCount(ostream &out);
@@ -46,49 +46,53 @@ public:
     void printSentences(ostream &out);
     void printTopTen(ostream &out);
     void printTime(ostream &out);
-
+    
     //UI print functions, what user will see
     void printSummary(ostream &out);//MUST PASS PARAMETER IN MAIN!!
-                                    //IF TO FILE, FOLLOW THE STEPS IN my MAIN.CPP
-                                    //
+    //IF TO FILE, FOLLOW THE STEPS IN my MAIN.CPP
+    //
     //void printLetters(char aChar);//BUG comparing. operator==
     void printLetters(string aStr);//BUG comparing. operator==
     void printEverything();
-
+    
     //SaveOut
     bool deleteFile();//If user chooses NOT to save the output file, call this function
-
+    
     //privates accessors
     int totalWords();
     int totalSyllables();
     int totalSentences();
     string fileName();//returns 'WordList.txt'
     string getSummaryFile();//returns 'printSummary.txt'
-
+    
     //converter for print letters
     string charConvert(char arg);//CONVERTS CHAR TO STRING
-    
+    void clear();
     void setMostFrequent(string aStr);
-
+    
 private:
-    fstream fout;
-    string outputFile, outputSummary;
+    //fstream fout;
+    string outputFile, outputSummary, prevHeapItem;
     node<T> *wRoot;
-    words<T> conv;
+    words<T> oWords;
     float totalTime;
     int tWords;
     int tSyllables;
+    int tempSyllables;
     int tSentences;
     int para;
     
     vector< node<T>* > wordList;//Vector for TREE's nodes
-    vector<T> heapList;
+    vector< AWORD* > heapList;
     vector<string> mostFrequent;
 };
 
 template<typename T>
 WordOut<T>::WordOut()
 {
+    prevHeapItem = "";
+    tempSyllables = 0;
+    para = 0;
     totalTime = 0.0;
     tWords = 0;
     tSyllables = 0;
@@ -96,46 +100,46 @@ WordOut<T>::WordOut()
     wRoot = NULL;
     outputFile = "WordList.txt";
     outputSummary = "PrintSummary.txt";
-    fout.open(outputFile.c_str(), ios::out | ios::trunc);
-
+    //fout.open(outputFile.c_str(), ios::out | ios::trunc);
+    
 }
 
 template <typename T>
 WordOut<T>::WordOut(int totalWords, int totalSentences)
 {
+    prevHeapItem = "";
+    tempSyllables = 0;
     totalTime = 0.0;
-    //tWords = 0;
+    para = 0;
     tSyllables = 0;
-    //tSentences = 0;
     wRoot = NULL;
     tWords = totalWords;
     tSentences = totalSentences;
     outputFile = "WordList.txt";
     outputSummary = "PrintSummary.txt";
-    fout.open(outputFile.c_str(), ios::out | ios::trunc);
+    //fout.open(outputFile.c_str(), ios::out | ios::trunc);
 }
 
 template <typename T>
 WordOut<T>::WordOut(int totalWords, int totalSentences, int toParag)
 {
     totalTime = 0.0;
-    //tWords = 0;
     tSyllables = 0;
-    //tSentences = 0;
     wRoot = NULL;
     para = toParag;
     tWords = totalWords;
     tSentences = totalSentences;
     outputFile = "WordList.txt";
     outputSummary = "PrintSummary.txt";
-    fout.open(outputFile.c_str(), ios::out | ios::trunc);
+    //fout.open(outputFile.c_str(), ios::out | ios::trunc);
 }
 
 template<typename T>
 WordOut<T>::~WordOut()
 {
     wordList.clear();
-    fout.close();
+    heapList.clear();
+    //fout.close();
 }
 
 template <typename T>
@@ -172,11 +176,7 @@ void WordOut<T>::traverse(node<T> *root)
         //Add total syllables for the current node from the tree
         tSyllables += root->totalSyllables();
         tWords += root->wordCount;
-
-
-        //wordList.push_back(root);
-        //heapList.push_back(root->word);
-
+        
         //Push in the tree's node
         addNode(root);
         if(root->gt)
@@ -199,43 +199,44 @@ void WordOut<T>::addNode(node<T> *aNode)
 template <typename T>
 void WordOut<T>::addNode(T item, int aParagraph, int aLine, int aSyllables)
 {
-    //if (!findNode(item))
+    if (oWords.stoupper(item) != oWords.stoupper(prevHeapItem))
     {
-        //
-    }
-
-    /*
- template<typename T>
- void node<T>::update(int paragraph, int line, int syllable)
- {
-     syllables = syllable;
-     if( int(paragrahsLines.size()) == 0 || int((paragrahsLines.size()-1)) < paragraph )
-     {
-         int toDo = (paragraph+1) - paragrahsLines.size();
-        for(int i = 0; i < (toDo-1); i++)
-        {
-            vector<int> newRow;
-                for(int j = 0; j <= 1; j++)
-                {
-                    //newRow.push_back('\0');
-                    ;
-                }
-            paragrahsLines.push_back(newRow);
-        }
-        vector<int> newRow2;
-        newRow2.push_back(line);
-        paragrahsLines.push_back(newRow2);
-    }
-    else if( int((paragrahsLines.size()-1)) == paragraph )
-    {
-      paragrahsLines[paragraph].push_back(line);
+        tempSyllables = aSyllables;
+        tSyllables += aSyllables;
+        node<T> *saveMe = new node<T>;
+        saveMe->word = item;
+        saveMe->wordCounts();
+        saveMe->update(aParagraph,aLine,aSyllables);
+        wordList.push_back(saveMe);
+        delete saveMe;
+        
+        AWORD *pushMe = new AWORD;
+        pushMe->str = item;
+        pushMe->frequency++;
+        pushMe->syllables = tempSyllables;
+        pushMe->paratraph.push_back(aParagraph);
+        pushMe->line.push_back(aLine);
+        prevHeapItem = item;
+        heapList.push_back(pushMe);
+        delete pushMe;
     }
     else
-     {
-         return;
-     }
- }
- */
+    {
+        int position = int(heapList.size()-1);
+        heapList[position]->frequency++;
+        heapList[position]->syllables += tempSyllables;
+        tSyllables += aSyllables;
+        heapList[position]->paratraph.push_back(aParagraph);
+        wordList[position]->wordCounts();
+        heapList[position]->line.push_back(aLine);
+    }
+    //cout << "heapList[0]: " << heapList[0]->str << endl;
+}
+
+template<typename T>
+void WordOut<T>::clear()
+{
+    wordList.clear();
 }
 
 template <typename T>
@@ -253,7 +254,7 @@ void WordOut<T>::printParagraphCount(ostream &out)
 template <typename T>
 void WordOut<T>::printReadingLevel(ostream &out)
 {
-    out << "Flesch Reading Ease: " << fleschLevel(tWords,tSentences,tSyllables) << "." << endl;
+    out << "Flesch Reading Level: " << fleschLevel(tWords,tSentences,tSyllables) << "." << endl;
 }
 
 template <typename T>
@@ -282,16 +283,16 @@ string WordOut<T>::getSummaryFile()
 template <typename T>
 void WordOut<T>::printSummary(ostream &out)
 {
-        out << "*** A Caskash Production (2011) ***\n";
-        out << "        printSummary.txt           \n\n";
-
-        //printReadingLevel(out);//CAUTION if parameters for this are not set, divide by zero error == CRASH!
-        printWordCount(out);
-        printParagraphCount(out);
-        printSentences(out);
-        printTime(out);
-        printTopTen(out);
-        out << "\n***********************************\n";
+    out << "*** A Caskash Production (2011) ***\n";
+    out << "        printSummary.txt           \n\n";
+    
+    printReadingLevel(out);//CAUTION if parameters for this are not set, divide by zero error == CRASH!
+    printWordCount(out);
+    printParagraphCount(out);
+    printSentences(out);
+    printTime(out);
+    printTopTen(out);
+    out << "\n***********************************\n";
 }
 
 template<typename T>
@@ -302,15 +303,13 @@ void WordOut<T>::printSentences(ostream &out)
 
 template <typename T>
 void WordOut<T>::printLetters(string aStr)
-{
-    
+{    
     string temp, temp2;
-     aStr[0]=toupper(aStr[0]);
     for(int i = 0; i < int(wordList.size()); i++)
     {
         temp = wordList[i]->word;
         temp2 = temp[0];
-        if(temp2 == aStr )
+        if(oWords.stoupper(temp2) == oWords.stoupper(aStr) )
         {
             wordList[i]->print(cout);
         }
@@ -346,23 +345,26 @@ int WordOut<T>::totalSentences()
 template<typename T>
 string WordOut<T>::charConvert(char arg)
 {
-     stringstream sstr;
-     string str;
-
-     sstr << arg;
-     sstr >> str;
-
-     return str;
+    stringstream sstr;
+    string str;
+    
+    sstr << arg;
+    sstr >> str;
+    
+    return str;
 }
 
 template<typename T>
 void WordOut<T>::printEverything()
 {
+    fstream fout;
+    fout.open(outputFile.c_str(), ios::out | ios::trunc);
     for(int i = 0; i < int(wordList.size()); i++)
     {
         wordList[i]->print(fout);
     }
     fout.close();
+    wordList.clear();
 }
 template<typename T>
 void WordOut<T>::setMostFrequent(string aStr) {

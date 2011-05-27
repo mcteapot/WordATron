@@ -12,13 +12,14 @@
 
 #include <vector>
 #include "AWord.h"
-
-
+#include "WordOut.h"
+#include <string>
 typedef int Index;
 
 template <typename T>
 class Heap {
 	public:
+        //Node based strcut
 		std::vector<T> nodes;
 
 		void push( const T& x );
@@ -37,6 +38,7 @@ class Heap {
 	public: 
         void debug();
 		void printInOrder();
+        void printInOrderToWordOut(WordOut<string> &wordsaver);
 
 };
 
@@ -44,38 +46,30 @@ class Heap {
 
 template <typename T>
 void Heap<T>::push( const T& x ) {
-	// stick it in at the bottom (last slot, next open leaf) / make room there
 	nodes.push_back(x);
 
 	Index cur = ( nodes.size() - 1 ),
 		parent;
 
-	// bubble up into place a.operator+ (b);
 	while ( exists(parent = parentOf(cur)) &&  (x < nodes[parent]) ) { 
-		//heap is out of order, swap parent down to make room, and move up
+
 		nodes[cur] = nodes[parent];
 		cur = parent;
 	}
-	nodes[cur] = x; // note, optimization: we only need to copy the data once, into its final position
+	nodes[cur] = x; 
 }
 	
 template <typename T>
 void Heap<T>::pop() {
-	// removing the root
+	T& data = nodes.back(); 
 
-	// start by swapping the last leaf into the root, then letting it cascade down into place
-	T& data = nodes.back(); // optimization: instead of swapping, just hold a ref to the "moving" data
-
-	//cascade down
 	Index cur = 0, child; 
-    while ( (child = smallestChildOf(cur)) // returns root (0) when no children exist
+    while ( (child = smallestChildOf(cur)) 
         &&    (nodes[child] < data) ) {
         nodes[cur] = nodes[child];
         cur = child;
     }
-    nodes[cur] = data; // note, no unnecessary copying is done :)
-
-	//right-size the vector
+    nodes[cur] = data; 
 	nodes.pop_back();
 }
 
@@ -91,27 +85,22 @@ bool Heap<T>::isEmpty() {
 
 template <typename T>
 Index Heap<T>::parentOf(Index i) {
-    // because the heap is a "complete" binary tree, and stored such,
-    // we can compute the parent instead of storing a pointer (, or worse - searching *shudder*)
-    return ( ( (i + 1)  // convert to one-based indexes
-                >> 1 )  // write out one-based indexes in binary, it'll make sense
-                - 1  ); // convert it back to zero-based for use with the vector
+    return ( ( (i + 1) 
+                >> 1 )  
+                - 1  ); 
 }
 
 template <typename T>
 Index Heap<T>::smallestChildOf(Index i) {
-    // get the child indexes
     Index left = ( ( ( i +1) 
                        << 1)
-                        - 1); // see Heap::paretnOf(Index i) for full rationalization
+                        - 1);
     Index right = left +1;
                 
     if (exists(right)) {
-        // because the heap is "complete" we know that if a right child exists, so does the left. 
-        // return the least
         return ( nodes[right] < nodes[left])? right: left;
     } else {
-        return (exists(left)) ? left : 0;  // signal with 0 (root) if neither child exists
+        return (exists(left)) ? left : 0;  
     }
 }    
 
@@ -132,12 +121,20 @@ void Heap<T>::debug() {
 }
 template <typename T>
 void Heap<T>::printInOrder() {
-    std::cout << "debugging Heap #" << this << "\n";
+    std::cout << "Printout of Heap #" << this << "\n";
 	for ( ; ! isEmpty(); pop() ) {
         //TODO
-        std::cout << top() << ", ";
+        std::cout << top().str << ", ";
     }
     std::cout << "\n\n";
+}
+template <typename T>
+void Heap<T>::printInOrderToWordOut(WordOut<string> &wordsaver) {
+	for ( ; ! isEmpty(); pop() ) {
+        //TODO
+        wordsaver.addNode(top().str, top().paratraph[0], top().line[0], top().syllables);
+        std::cout << top() << ", ";
+    }
 }
 
 #endif //HEAP_H
