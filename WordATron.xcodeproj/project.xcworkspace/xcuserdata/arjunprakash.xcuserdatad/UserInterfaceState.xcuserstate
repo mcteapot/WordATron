@@ -61333,7 +61333,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>328152600.718548</real>
+		<real>328152684.456141</real>
 		<string>{129, 209}</string>
 		<string>{363, 0}</string>
 		<dict>
@@ -61429,8 +61429,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>328152600.71878898</real>
-		<string>{452, 1288}</string>
+		<real>328152684.45635599</real>
+		<string>{3818, 1165}</string>
 		<string>{1006, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -61810,7 +61810,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>328152600.718696</real>
+		<real>328152684.45626903</real>
 		<string>{9577, 2329}</string>
 		<string>{7000, 0}</string>
 		<dict>
@@ -78503,7 +78503,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>328152600.74282801</real>
+		<real>328152684.45936102</real>
 		<string>{0, 1857}</string>
 		<string>{515, 0}</string>
 		<string>WordMuncher.h</string>
@@ -78742,7 +78742,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>328152600.74251902</real>
+		<real>328152684.45905399</real>
 		<string>{9577, 2329}</string>
 		<string>{7000, 0}</string>
 		<string>WordMuncher::addWordToStruct(std::string word)</string>
@@ -139397,7 +139397,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>328152600.74400097</real>
+		<real>328152684.46061701</real>
 		<string>{5541, 335}</string>
 		<string>{3506, 0}</string>
 		<string>main (int argc, const char * argv[])</string>
@@ -139636,7 +139636,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>328152600.74371302</real>
+		<real>328152684.460311</real>
 		<string>{129, 209}</string>
 		<string>{363, 0}</string>
 		<string>class Heap</string>
@@ -143723,7 +143723,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>702</real>
+		<real>532</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -143753,7 +143753,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>126</real>
+		<real>296</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -144117,8 +144117,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>328152600.744991</real>
-		<string>{336, 1230}</string>
+		<real>328152684.46163601</real>
+		<string>{336, 927}</string>
 		<string>{735, 13}</string>
 		<string>readFileRegex(std::string reg, std::string filename)</string>
 		<dict>
@@ -144153,7 +144153,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {610, 680}}</string>
+		<string>{{0, 0}, {610, 510}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -144405,8 +144405,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>328152600.74484402</real>
-		<string>{452, 1288}</string>
+		<real>328152684.46147901</real>
+		<string>{3818, 1165}</string>
 		<string>{1006, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -144440,7 +144440,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {1149, 680}}</string>
+		<string>{{0, 0}, {1149, 510}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
