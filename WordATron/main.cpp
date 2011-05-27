@@ -54,9 +54,9 @@ int main (int argc, const char * argv[]) {
     WordMuncher wordmunch("\\w[\\w.]\\S+|\\w[\\w.]\\?|\\w[\\w+]", fileName);
     //WordOut<string> wordsaver();
     WordOut<string> wordsaver((int)(wordmunch.getTotoalWords()), (int)(wordmunch.getTotoalLines()),wordmunch.getTotalParagraphs());
+    //Data Sructs
     tree<string> thetree;
     Heap<AWORD> theHeap;
-    WordOut<string> wordsaverHeap((int)(wordmunch.getTotoalWords()), (int)(wordmunch.getTotoalLines()),wordmunch.getTotalParagraphs());
     
     if(sorting) {
         cout << "1: TREE" << endl;
