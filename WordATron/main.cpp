@@ -50,6 +50,8 @@ int main (int argc, const char * argv[]) {
     if(fileName == "") {
         fileName = "example.txt";
     }
+    
+    //string fileName = "example.txt";
     //Load File
     WordMuncher wordmunch("\\w[\\w.]\\S+|\\w[\\w.]\\?|\\w[\\w+]", fileName);
     //WordOut<string> wordsaver();
