@@ -106,10 +106,9 @@ int main (int argc, const char * argv[]) {
         timeval t1, t2;
         gettimeofday(&t1, NULL);
         
-        //create Tree;
-        wordmunch.setTreeSructOfWords(thetree);
-        thetree.setTraverse(IN);
-        
+        //creat Heap
+		wordmunch.setHeapSructOfWords(theHeap);
+		
         // stop timer
         gettimeofday(&t2, NULL);
         elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;      // sec to ms
