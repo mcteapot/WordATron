@@ -133,7 +133,7 @@ void Heap<T>::printInOrderToWordOut(WordOut<string> &wordsaver) {
 	for ( ; ! isEmpty(); pop() ) {
         //TODO
         wordsaver.addNode(top().str, top().paratraph[0], top().line[0], top().syllables);
-        std::cout << top() << ", ";
+        //std::cout << top() << ", ";
     }
 }
 
